@@ -1,0 +1,25 @@
+{
+  "name": "pleated-slacks",
+  "version": "0.0.1",
+  "description": "An easy way to get started with Docker, for node apps",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {},
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/team-jwt/pleated-slacks.git"
+  },
+  "keywords": [
+    "docker",
+    "project-management"
+  ],
+  "author": "@iluvpool19, @juniorbird, @tbywong",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/team-jwt/pleated-slacks/issues"
+  },
+  "homepage": "https://github.com/team-jwt/pleated-slacks#readme"
+}
