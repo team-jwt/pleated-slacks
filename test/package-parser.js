@@ -9,11 +9,9 @@ console.log(parser);
 let pjDeps = parser.dependencies('./test/fixtures/package-test.json')
 
 // Load fixtures
-// const pj = JSON.parse(fs.readFileSync('./test/fixtures/package-test.json', 'utf8'));
 
 
 // Check that we read all of the packages from package.json (#5)
-// let pjDeps = Object.keys(pj.dependencies).concat(Object.keys(pj.devDependencies));
 let targetDeps = [ 'mongoose',
   'redis',
   'express',
@@ -27,6 +25,7 @@ let targetDeps = [ 'mongoose',
   'consul'];
 
 describe('package.json parser', () => {
+  // Check that we grab the keywords from all of the packages in package.json (#6)-
   it('should grab a list of all packages', () => {
     expect(pjDeps).toBeAn(Array);
     expect(pjDeps.length).toEqual(targetDeps.length);
@@ -34,7 +33,6 @@ describe('package.json parser', () => {
   });
 
 });
-// Check that we grab the keywords from all of the packages in package.json (#6)-
 
 
 // Check that we grab all of the official repos from Docker (#1)
