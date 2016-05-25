@@ -9,7 +9,8 @@
     "mocha": "^2.5.2"
   },
   "scripts": {
-    "test": "test"
+    "test": "npm run test-parser",
+    "test-parser": "mocha ./test/package-parser.js"
   },
   "repository": {
     "type": "git",
