@@ -8,8 +8,6 @@ const parser = require('../lib/package-parser.js')
 let pjDeps = parser.dependencies('./test/fixtures/package-test.json')
 
 // Load fixtures
-
-
 let targetDeps = [ 'mongoose',
   'redis',
   'express',
@@ -33,7 +31,6 @@ describe('package.json parser', () => {
 });
 
 // Check that we grab the keywords from all of the packages in package.json (#6)-
- 
 
 // Check that we grab all of the official repos from Docker (#1)
 /*
