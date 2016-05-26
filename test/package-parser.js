@@ -2,6 +2,7 @@
 
 const expect = require('expect');
 const fs = require('fs');
+const promise = require('bluebird');
 
 // File we're testing
 const parser = require('../lib/package-parser.js')
@@ -42,13 +43,23 @@ describe('package.json parser', () => {
     expect(pjDeps.length).toEqual(targetDeps.length);
     expect(pjDeps).toEqual(targetDeps);
   });
-  it('should be able to find the packages on npmjs.com', () => {
+  it('should be able to generate package URLs', () => {
   // Do we get proper urls? (#6)
     let npmURL;
     for (let dep of targetDeps) {
       expect(parser.depURL(dep)).toEqual(`https://www.npmjs.com/package/${dep}`);
     }
-
+  });
+  it('should be able to find the packages on npmjs.com', () => {
+  // Do we load the page on npm? (#6)
+  return parser.fetchNPM('https://www.npmjs.com/package/sequelize')
+    .then((result) => {
+      console.log(result);
+      expect(result).toExist;
+    });
+    // for (let dep of targetDeps) {
+    //
+    // }
   });
 
 });
