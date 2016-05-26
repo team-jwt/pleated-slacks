@@ -4,6 +4,8 @@
   "description": "An easy way to get started with Docker, for node apps",
   "main": "index.js",
   "dependencies": {
+    "cheerio": "^0.20.0",
+    "request": "^2.72.0"
   },
   "devDependencies": {
     "codacy-coverage": "^1.1.3",

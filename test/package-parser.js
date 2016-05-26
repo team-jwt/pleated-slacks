@@ -6,6 +6,7 @@ const fs = require('fs');
 // File we're testing
 const parser = require('../lib/package-parser.js')
 let pjDeps = parser.dependencies('./test/fixtures/package-test.json')
+// let pjKeywords = parser.keywords(targetDeps);
 
 // Load fixtures
 let targetDeps = [ 'mongoose',
@@ -20,12 +21,34 @@ let targetDeps = [ 'mongoose',
   'mocha',
   'consul'];
 
+let targetKeywords = {
+  'mongoose': ['db', 'orm', 'nosql', 'query', 'datastore', 'data', 'odm', 'database', 'schema', 'model', 'document', 'mongodb'],
+  'redis': ['backpressure', 'pubsub', 'nodejs', 'queue', 'performance', 'pipelining', 'transaction', 'redis', 'database'],
+  'express': ['api', 'app', 'router', 'restful', 'rest', 'web', 'sinatra', 'framework', 'express'],
+  'q': ['node', 'browser', 'fluent', 'flow control', 'async', 'future', 'deferred', 'promises-aplus', 'promises-a', 'promises', 'promise', 'q'],
+  'sequelize': ['object relational mapper', 'nodejs', 'orm', 'mssql', 'postgres', 'postgresql', 'sqlite', 'mysql'],
+  'ghost': ['cms', 'blog', 'ghost'],
+  'cradle': ['couch', 'database', 'couchdb'],
+  'node-solr-smart-client': ['solr cloud', 'zookeeper', 'solr'],
+  'expect': ['spec', 'test', 'assert', 'expect'],
+  'mocha': ['tap', 'tdd', 'bdd', 'test', 'mocha'],
+  'consul': ['consul'],
+}
+
 describe('package.json parser', () => {
   // Check that we read all of the packages from package.json (#5)
   it('should grab a list of all packages', () => {
     expect(pjDeps).toBeAn(Array);
     expect(pjDeps.length).toEqual(targetDeps.length);
     expect(pjDeps).toEqual(targetDeps);
+  });
+  it('should be able to find the packages on npmjs.com', () => {
+  // Do we get proper urls? (#6)
+    let npmURL;
+    for (let dep of targetDeps) {
+      expect(parser.depURL(dep)).toEqual(`https://www.npmjs.com/package/${dep}`);
+    }
+
   });
 
 });
