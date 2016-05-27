@@ -57,11 +57,6 @@ describe('package.json parser', () => {
       console.log(result);
       expect(result).toExist;
     });
-    // for (let dep of targetDeps) {
-    //
-    // }
-  });
-
 });
 
 // Check that we grab the keywords from all of the packages in package.json (#6)-
