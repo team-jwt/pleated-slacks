@@ -1,0 +1,42 @@
+{
+    "count": 108,
+    "next": "https://hub.docker.com/v2/repositories/library/?page=2&page_size=3",
+    "previous": null,
+    "results": [{
+        "user": "library",
+        "name": "nginx",
+        "namespace": "library",
+        "status": 1,
+        "description": "Official build of Nginx.",
+        "is_private": false,
+        "is_automated": false,
+        "can_edit": false,
+        "star_count": 3054,
+        "pull_count": 197441994,
+        "last_updated": "2016-05-24T23:08:09.477673Z"
+    }, {
+        "user": "library",
+        "name": "busybox",
+        "namespace": "library",
+        "status": 1,
+        "description": "Busybox base image.",
+        "is_private": false,
+        "is_automated": false,
+        "can_edit": false,
+        "star_count": 672,
+        "pull_count": 104030667,
+        "last_updated": "2016-05-06T15:16:37.197392Z"
+    }, {
+        "user": "library",
+        "name": "ubuntu",
+        "namespace": "library",
+        "status": 1,
+        "description": "Ubuntu is a Debian-based Linux operating system based on free software.",
+        "is_private": false,
+        "is_automated": false,
+        "can_edit": false,
+        "star_count": 3979,
+        "pull_count": 58807723,
+        "last_updated": "2016-05-06T23:30:20.239306Z"
+    }]
+}

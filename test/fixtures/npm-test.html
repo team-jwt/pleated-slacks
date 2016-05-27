@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<!-- saved from url=(0039)https://www.npmjs.com/package/sequelize -->
+<html lang="en" prefix="og: http://ogp.me/ns#" class=" js"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style type="text/css">.autocomplete-container {  overflow: visible;}.autocomplete-suggestions {  border: 1px solid #999;  background: #FFF;  overflow-x: hidden;  overflow-y: auto;  cursor: default;}.autocomplete-suggestion {  padding: 2px 5px;  white-space: nowrap;  overflow: hidden;}.autocomplete-selected {  background: #F0F0F0;}.autocomplete-container strong {  font-weight: bold;}#powered-by-constructor-io {  font-size: 0.8em;  text-align:right;  background-color:rgb(255,255,192);  font-family:sans-serif;  padding: 4px 10px;  position: absolute;  border: 1px solid #999;}#constructorio-backing-node {  background-color:rgb(255,255,255);  padding: 4px 10px;  position: absolute;  border: 1px solid #FFF;}.autocomplete-suggestion-image {  float:left;  padding-right: 10px;}#autocomplete-direct-results:before {  content:'Products'}#autocomplete-search-container:before {  content:'Search Suggestions'}.autocomplete-suggestion-description {  font-size: 0.8em;  display: block;  margin-left: 10px;  line-height: 1.0em;}</style>
+  
+  <script type="text/javascript" src="./npm-test_files/ba86f45fc4"></script><script src="./npm-test_files/nr-943.min.js"></script><script async="" src="./npm-test_files/analytics.js"></script><script nonce="8740f88dc9c10d33ce55e9e987023cc5f263ad6bcbf059c753fdde2b1ea0a4158b471dae7defe3428c0ffb63206674adaa9935abda7ba04d14fbb8f0897e8c71" type="text/javascript">window.NREUM||(NREUM={});NREUM.info = {"agent":"","beacon":"bam.nr-data.net","errorBeacon":"bam.nr-data.net","licenseKey":"ba86f45fc4","applicationID":"9556514","applicationTime":310.689443,"transactionName":"M1BXZxFZVkQFURBdVwoafVITURdwIWZLG0gFVl5SBF0XTBRTB19ZA1BI","queueTime":0,"ttGuid":"78ee2f90b1d624","agentToken":null}; window.NREUM||(NREUM={}),__nr_require=function(e,t,n){function r(n){if(!t[n]){var o=t[n]={exports:{}};e[n][0].call(o.exports,function(t){var o=e[n][1][t];return r(o||t)},o,o.exports)}return t[n].exports}if("function"==typeof __nr_require)return __nr_require;for(var o=0;o<n.length;o++)r(n[o]);return r}({1:[function(e,t,n){function r(e,t){return function(){o(e,[(new Date).getTime()].concat(a(arguments)),null,t)}}var o=e("handle"),i=e(2),a=e(3);"undefined"==typeof window.newrelic&&(newrelic=NREUM);var u=["setPageViewName","setCustomAttribute","finished","addToTrace","inlineHit"],c=["addPageAction"],f="api-";i(u,function(e,t){newrelic[t]=r(f+t,"api")}),i(c,function(e,t){newrelic[t]=r(f+t)}),t.exports=newrelic,newrelic.noticeError=function(e){"string"==typeof e&&(e=new Error(e)),o("err",[e,(new Date).getTime()])}},{}],2:[function(e,t,n){function r(e,t){var n=[],r="",i=0;for(r in e)o.call(e,r)&&(n[i]=t(r,e[r]),i+=1);return n}var o=Object.prototype.hasOwnProperty;t.exports=r},{}],3:[function(e,t,n){function r(e,t,n){t||(t=0),"undefined"==typeof n&&(n=e?e.length:0);for(var r=-1,o=n-t||0,i=Array(0>o?0:o);++r<o;)i[r]=e[t+r];return i}t.exports=r},{}],ee:[function(e,t,n){function r(){}function o(e){function t(e){return e&&e instanceof r?e:e?u(e,a,i):i()}function n(n,r,o){e&&e(n,r,o);for(var i=t(o),a=l(n),u=a.length,c=0;u>c;c++)a[c].apply(i,r);var s=f[g[n]];return s&&s.push([m,n,r,i]),i}function p(e,t){w[e]=l(e).concat(t)}function l(e){return w[e]||[]}function d(e){return s[e]=s[e]||o(n)}function v(e,t){c(e,function(e,n){t=t||"feature",g[n]=t,t in f||(f[t]=[])})}var w={},g={},m={on:p,emit:n,get:d,listeners:l,context:t,buffer:v};return m}function i(){return new r}var a="nr@context",u=e("gos"),c=e(2),f={},s={},p=t.exports=o();p.backlog=f},{}],gos:[function(e,t,n){function r(e,t,n){if(o.call(e,t))return e[t];var r=n();if(Object.defineProperty&&Object.keys)try{return Object.defineProperty(e,t,{value:r,writable:!0,enumerable:!1}),r}catch(i){}return e[t]=r,r}var o=Object.prototype.hasOwnProperty;t.exports=r},{}],handle:[function(e,t,n){function r(e,t,n,r){o.buffer([e],r),o.emit(e,t,n)}var o=e("ee").get("handle");t.exports=r,r.ee=o},{}],id:[function(e,t,n){function r(e){var t=typeof e;return!e||"object"!==t&&"function"!==t?-1:e===window?0:a(e,i,function(){return o++})}var o=1,i="nr@id",a=e("gos");t.exports=r},{}],loader:[function(e,t,n){function r(){if(!w++){var e=v.info=NREUM.info,t=s.getElementsByTagName("script")[0];if(e&&e.licenseKey&&e.applicationID&&t){c(l,function(t,n){e[t]||(e[t]=n)});var n="https"===p.split(":")[0]||e.sslForHttp;v.proto=n?"https://":"http://",u("mark",["onload",a()],null,"api");var r=s.createElement("script");r.src=v.proto+e.agent,t.parentNode.insertBefore(r,t)}}}function o(){"complete"===s.readyState&&i()}function i(){u("mark",["domContent",a()],null,"api")}function a(){return(new Date).getTime()}var u=e("handle"),c=e(2),f=window,s=f.document;NREUM.o={ST:setTimeout,CT:clearTimeout,XHR:f.XMLHttpRequest,REQ:f.Request,EV:f.Event,PR:f.Promise,MO:f.MutationObserver},e(1);var p=""+location,l={beacon:"bam.nr-data.net",errorBeacon:"bam.nr-data.net",agent:"js-agent.newrelic.com/nr-943.min.js"},d=window.XMLHttpRequest&&XMLHttpRequest.prototype&&XMLHttpRequest.prototype.addEventListener&&!/CriOS/.test(navigator.userAgent),v=t.exports={offset:a(),origin:p,features:{},xhrWrappable:d};s.addEventListener?(s.addEventListener("DOMContentLoaded",i,!1),f.addEventListener("load",r,!1)):(s.attachEvent("onreadystatechange",o),f.attachEvent("onload",r)),u("mark",["firstbyte",a()],null,"api");var w=0},{}]},{},["loader"]);</script>
+  <title>sequelize</title>
+
+    <meta name="description" content="Multi dialect ORM for Node.JS/io.js">
+    <meta property="og:description" content="Multi dialect ORM for Node.JS/io.js">
+    <meta property="og:title" content="sequelize">
+    <meta property="og:url" content="https://www.npmjs.com/package/sequelize">
+    <meta property="og:site_name" content="npm">
+    <meta name="keywords" content="object relational mapper,nodejs,orm,mssql,postgres,postgresql,sqlite,mysql">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:url" content="https://www.npmjs.com/package/sequelize">
+    <meta name="twitter:title" content="npm: sequelize">
+    <meta name="twitter:description" content="Multi dialect ORM for Node.JS/io.js">
+  
+  
+  <meta http-equiv="cleartype" content="on">
+  
+  <meta name="apple-mobile-web-app-capable" content="no">
+  
+  
+  <meta name="viewport" content="width=device-width,minimum-scale=1.0,initial-scale=1,user-scalable=yes">
+  
+  <meta name="x-npm:ga:id" content="UA-47041310-1">
+  <meta name="x-npm:ga:dimensions" content="{&quot;&#39;aboveChrome&quot;:&quot;dimension1&quot;,&quot;belowHeader&quot;:&quot;dimension3&quot;,&quot;packagePage&quot;:&quot;dimension2&#39;&quot;}">
+  
+  <link rel="canonical" href="https://www.npmjs.com/package/sequelize">
+  <link rel="search" type="application/opensearchdescription+xml" href="https://www.npmjs.com/opensearch.xml" title="npm">
+
+    <link rel="stylesheet" media="all" href="./npm-test_files/index.e86df9b9.css">
+
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js"></script>
+  <![endif]-->
+
+  <link rel="stylesheet" href="./npm-test_files/css">
+  
+    <script src="./npm-test_files/index.min.82964408.js"></script><style type="text/css"></style>
+    <style>
+      .marketing {
+  margin: 0px;
+  margin-left: -10px;
+  margin-bottom: 40px;
+  padding: 0px 0px;
+  font-size: 15px;
+  font-style: normal;
+  fond-variant: normal;
+  fort-weight: normal;
+  background: rgba(0, 0, 0, 0.02);
+  border-radius: 2px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  color: rgba(0, 0, 0, 0.4);
+  text-decoration: none;
+  letter-spacing: -0.03em;
+  line-height: 22.5px;
+  }
+  
+  .marketing a {
+  font-weight: 400;
+  text-decoration: none;
+  color: #cb3837;
+  }
+  
+  .marketing h3 {
+  display: block;
+  margin: 0;
+  padding: 20px 0 10px 0;
+  font-size: 20px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 400;
+  line-height: 22px;
+  text-decoration: none;
+  color: rgba(0, 0, 0, 0.8);
+  }
+  
+  .marketing h3 a {
+  color: rgba(0, 0, 0, 0.8);
+  }
+  
+  .marketing h3 a:hover {
+  color: #cb3837;
+  }
+  
+  .marketing p {
+  line-height: 22.5px;
+  margin-left: 10px;
+  margin-right: 10px;
+  }
+  
+  .marketing p a {
+  white-space: nowrap;
+  }
+  
+  #marketing-texthed {
+  margin-left: 10px;
+  }
+    </style>
+  <link rel="apple-touch-icon" sizes="57x57" href="https://www.npmjs.com/static/images/touch-icons/apple-touch-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="https://www.npmjs.com/static/images/touch-icons/apple-touch-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="https://www.npmjs.com/static/images/touch-icons/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://www.npmjs.com/static/images/touch-icons/apple-touch-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="https://www.npmjs.com/static/images/touch-icons/apple-touch-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="https://www.npmjs.com/static/images/touch-icons/apple-touch-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="https://www.npmjs.com/static/images/touch-icons/apple-touch-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="https://www.npmjs.com/static/images/touch-icons/apple-touch-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://www.npmjs.com/static/images/touch-icons/apple-touch-icon-180x180.png">
+  <link rel="apple-touch-startup-image" media="(device-width: 768px) and (device-height: 1024px) and (orientation: landscape) and (-webkit-device-pixel-ratio: 1)" href="https://www.npmjs.com/static/images/touch-icons/apple-touch-startup-image-1024x748.png">
+  <link rel="apple-touch-startup-image" media="(device-width: 768px) and (device-height: 1024px) and (orientation: portrait) and (-webkit-device-pixel-ratio: 2)" href="https://www.npmjs.com/static/images/touch-icons/apple-touch-startup-image-1536x2008.png">
+  <link rel="apple-touch-startup-image" media="(device-width: 768px) and (device-height: 1024px) and (orientation: landscape) and (-webkit-device-pixel-ratio: 2)" href="https://www.npmjs.com/static/images/touch-icons/apple-touch-startup-image-2048x1496.png">
+  <link rel="apple-touch-startup-image" media="(device-width: 320px) and (device-height: 480px) and (-webkit-device-pixel-ratio: 1)" href="https://www.npmjs.com/static/images/touch-icons/apple-touch-startup-image-320x460.png">
+  <link rel="apple-touch-startup-image" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)" href="https://www.npmjs.com/static/images/touch-icons/apple-touch-startup-image-640x1096.png">
+  <link rel="apple-touch-startup-image" media="(device-width: 320px) and (device-height: 480px) and (-webkit-device-pixel-ratio: 2)" href="https://www.npmjs.com/static/images/touch-icons/apple-touch-startup-image-640x920.png">
+  <link rel="apple-touch-startup-image" media="(device-width: 768px) and (device-height: 1024px) and (orientation: portrait) and (-webkit-device-pixel-ratio: 1)" href="https://www.npmjs.com/static/images/touch-icons/apple-touch-startup-image-768x1004.png">
+  <link rel="icon" type="image/png" href="https://www.npmjs.com/static/images/touch-icons/favicon-32x32.png" sizes="32x32">
+  <link rel="icon" type="image/png" href="https://www.npmjs.com/static/images/touch-icons/favicon-230x230.png" sizes="230x230">
+  <link rel="icon" type="image/png" href="https://www.npmjs.com/static/images/touch-icons/favicon-96x96.png" sizes="96x96">
+  <link rel="icon" type="image/png" href="https://www.npmjs.com/static/images/touch-icons/android-chrome-192x192.png" sizes="192x192">
+  <link rel="icon" type="image/png" href="https://www.npmjs.com/static/images/touch-icons/coast-228x228.png" sizes="228x228">
+  <link rel="icon" type="image/png" href="https://www.npmjs.com/static/images/touch-icons/favicon-16x16.png" sizes="16x16">
+  <link rel="manifest" href="https://www.npmjs.com/static/images/touch-icons/manifest.json">
+  <link rel="shortcut icon" href="https://www.npmjs.com/static/images/touch-icons/favicon.ico">
+  <link rel="yandex-tableau-widget" href="https://www.npmjs.com/static/images/touch-icons/yandex-browser-manifest.json">
+  <meta property="og:image" content="https://www.npmjs.com/static/images/touch-icons/open-graph.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="msapplication-TileColor" content="#cb3837">
+  <meta name="msapplication-TileImage" content="/static/images/touch-icons/mstile-144x144.png">
+  <meta name="msapplication-config" content="/static/images/touch-icons/browserconfig.xml">
+  <meta name="theme-color" content="#cb3837">
+
+<style>.autocomplete-container, .autocomplete-suggestions, #powered-by-constructor-io { width: 1181px !important }</style><style id="iconic-responsive-css" type="text/css">/* Iconic Responsive Support Styles */
+.iconic-property-fill, .iconic-property-text {stroke: none !important;}
+.iconic-property-stroke {fill: none !important;}
+svg.iconic.iconic-fluid {height:100% !important;width:100% !important;}
+svg.iconic.iconic-sm:not(.iconic-size-md):not(.iconic-size-lg), svg.iconic.iconic-size-sm{width:16px;height:16px;}
+svg.iconic.iconic-md:not(.iconic-size-sm):not(.iconic-size-lg), svg.iconic.iconic-size-md{width:32px;height:32px;}
+svg.iconic.iconic-lg:not(.iconic-size-sm):not(.iconic-size-md), svg.iconic.iconic-size-lg{width:128px;height:128px;}
+svg.iconic-sm > g.iconic-md, svg.iconic-sm > g.iconic-lg, svg.iconic-md > g.iconic-sm, svg.iconic-md > g.iconic-lg, svg.iconic-lg > g.iconic-sm, svg.iconic-lg > g.iconic-md {display: none;}
+svg.iconic.iconic-icon-sm > g.iconic-lg, svg.iconic.iconic-icon-md > g.iconic-lg {display:none;}
+svg.iconic-sm:not(.iconic-icon-md):not(.iconic-icon-lg) > g.iconic-sm, svg.iconic-md.iconic-icon-sm > g.iconic-sm, svg.iconic-lg.iconic-icon-sm > g.iconic-sm {display:inline;}
+svg.iconic-md:not(.iconic-icon-sm):not(.iconic-icon-lg) > g.iconic-md, svg.iconic-sm.iconic-icon-md > g.iconic-md, svg.iconic-lg.iconic-icon-md > g.iconic-md {display:inline;}
+svg.iconic-lg:not(.iconic-icon-sm):not(.iconic-icon-md) > g.iconic-lg, svg.iconic-sm.iconic-icon-lg > g.iconic-lg, svg.iconic-md.iconic-icon-lg > g.iconic-lg {display:inline;}</style><script type="text/javascript" src="chrome-extension://aadgmnobpdmgmigaicncghmmoeflnamj/ng-inspector.js"></script><style id="style-1-cropbar-clipper">/* Copyright 2014 Evernote Corporation. All rights reserved. */
+.en-markup-crop-options {
+    top: 18px !important;
+    left: 50% !important;
+    margin-left: -100px !important;
+    width: 200px !important;
+    border: 2px rgba(255,255,255,.38) solid !important;
+    border-radius: 4px !important;
+}
+
+.en-markup-crop-options div div:first-of-type {
+    margin-left: 0px !important;
+}
+</style></head>
+
+<body itemscope="" itemtype="http://schema.org/WebSite" data-crumb="V8bFwMtPiVd7nrr60ZVbr-BwGCOYIaU-g0mSHNRZHwY">
+  <meta itemprop="url" content="https://www.npmjs.com/">
+
+
+  <header class="logged-in ">
+    <!-- logo -->
+    <div class="header-item brand-container">
+      <div class="logo-container" id="npm-logo">
+        <a href="https://www.npmjs.com/"><img src="./npm-test_files/npm-logo.svg" alt="npm logo"></a>
+      </div>
+    </div>
+    <!-- /logo -->
+  
+    <!-- search -->
+    <div class="header-item header-search-container">
+      <form class="site-search" id="npm-search" action="https://www.npmjs.com/search" method="get" itemprop="potentialAction" itemscope="" itemtype="http://schema.org/SearchAction">
+        <meta itemprop="target" content="https://www.npmjs.com/search?q={q}">
+        <div id="site-search-container">
+            <input name="q" value="" type="search" id="site-search" placeholder="find packages" tabindex="1" autocorrect="off" autocapitalize="off" itemprop="query-input" autocomplete="off">
+        </div>
+        <input type="submit">
+      </form>
+    </div>
+  
+  
+    <!-- menu 1 -->
+    <div class="header-item user-info-container">
+      <div class="user-info">
+          <div class="drop-down-menu-container" role="navigation">
+  
+            <a id="user-info-drop-down-menu-toggle" class="drop-down-menu-toggle" href="https://www.npmjs.com/package/sequelize#user-info-menu" role="button" aria-haspopup="true" aria-owns="user-info-menu"><span class="a11y-only">Toggle User Menu</span>
+              <span class="user-info-salutation" data-user-name="kaizendad" data-is-paid="">Greetings, <span id="salutation-username">kaizendad</span></span>
+              <img alt="" src="./npm-test_files/51320c4bdf91ee508944196b09eff327">
+            </a>
+  
+            <div role="menu" id="user-info-menu" class="drop-down-menu" aria-labelledby="user-info-drop-down-menu-toggle">
+              <div class="drop-down-menu-section">
+                <ul>
+                  <li><a href="https://www.npmjs.com/~kaizendad">profile</a></li>
+                  <li><a href="https://www.npmjs.com/profile-edit">personal info</a></li>
+                  <li><a href="https://www.npmjs.com/settings/billing">billing</a></li>
+                  <li><a href="https://www.npmjs.com/settings/tokens">tokens</a></li>
+                  <li><form method="POST" action="https://www.npmjs.com/logout">  <input type="hidden" name="crumb" value="V8bFwMtPiVd7nrr60ZVbr-BwGCOYIaU-g0mSHNRZHwY">
+  <button type="submit" class="btn-link">logout</button></form></li>
+                </ul>
+              </div> <!-- .drop-down-menu-section -->
+            </div> <!-- .drop-down-menu -->
+          </div> <!-- .drop-down-menu-container -->
+      </div> <!-- .user-info -->
+    </div>
+    <!-- /menu 1 -->
+  
+    <!-- menu 2 -->
+    <div class="header-item header-nav-menu-container">
+      <a href="https://www.npmjs.com/package/sequelize#" id="npm-expansions" class="npm-expansions" data-event-trigger="click" data-event-name="npm-expansions">Needs Perl Modules</a>
+  
+      <div class="nav-menu-container" role="navigation">
+        <a class="nav-toggle drop-down-menu-toggle" href="https://www.npmjs.com/package/sequelize#product-navigation"><span class="a11y-only">Toggle Navigation</span>
+          <img alt="mobile navigation menu" src="./npm-test_files/mobile-menu.png">
+        </a>
+  
+  
+        <div class="drop-down-menu-container" role="menu">
+          <nav id="product-navigation" class="product-navigation drop-down-menu">
+            <ul class="drop-down-menu-section products-list">
+              <li><a id="nav-enterprise-link" href="https://www.npmjs.com/npm/enterprise">npm Enterprise</a></li>
+              <li><a id="nav-private-link" href="https://www.npmjs.com/npm/private-packages" data-event-trigger="click" data-event-name="private-modules-nav-link">npm Private Packages</a></li>
+              <li><a id="nav-oss-link" href="https://www.npmjs.com/npm/open-source">npm Open Source</a></li>
+              <li><a id="nav-docs-link" href="https://docs.npmjs.com/">documentation</a></li>
+              <li><a id="nav-support-link" href="https://www.npmjs.com/support">support</a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+    <!-- /menu 2 -->
+  
+  
+  
+  </header>
+
+
+    <div class="container content">
+      
+<div class="content-column">
+
+  <h1 class="package-name">
+    <a href="https://www.npmjs.com/package/sequelize" class="active">sequelize</a>
+      <i class="icon-public"></i>
+  </h1>
+  <p class="package-description">Multi dialect ORM for Node.JS/io.js</p>
+
+  <form class="star">
+    <input type="hidden" name="name" value="sequelize">
+    <input id="star-input" type="checkbox" name="isStarred" value="true">
+    <label for="star-input" class="icon-star"></label>
+      <input type="hidden" name="crumb" value="V8bFwMtPiVd7nrr60ZVbr-BwGCOYIaU-g0mSHNRZHwY">
+  </form>
+
+  <div id="readme" class="markdown">
+      <h1 id="user-content-sequelize" class="deep-link package-name-redundant"><a href="https://www.npmjs.com/package/sequelize#sequelize">Sequelize</a></h1>
+<p><a href="https://travis-ci.org/sequelize/sequelize"><img src="./npm-test_files/sequelize.svg" class="badge"></a> <a href="https://david-dm.org/sequelize/sequelize"><img src="./npm-test_files/sequelize(1).svg" class="badge"></a> <a href="https://codeclimate.com/github/sequelize/sequelize"><img src="./npm-test_files/coverage.svg"></a>
+<a href="https://www.bountysource.com/teams/sequelize/issues?utm_source=Sequelize&amp;utm_medium=shield&amp;utm_campaign=bounties_received"><img src="./npm-test_files/team"></a>
+<a href="http://sequelize-slack.herokuapp.com/"><img src="./npm-test_files/badge.svg"></a></p>
+<p>Sequelize is a promise-based Node.js/io.js ORM for Postgres, MySQL, MariaDB, SQLite and Microsoft SQL Server. It features solid transaction support, relations, read replication and more.</p>
+<p><a href="http://sequelize.readthedocs.org/en/latest/">Documentation</a></p>
+<h2 id="user-content-installation" class="deep-link"><a href="https://www.npmjs.com/package/sequelize#installation">Installation</a></h2>
+<p><code>npm install sequelize</code></p>
+<p>From 3.0.0 and up Sequelize will follow SEMVER. 3.0.0 contains important security fixes so we highly recommend that users upgrade.</p>
+<p>If you still use 1.7 please prefer to <a href="https://github.com/sequelize/sequelize/wiki/Upgrading-to-2.0">Upgrading to 2.0</a> and the changelog between 2.0 and 3.0. 2.1 also has a breaking change.</p>
+<h2 id="user-content-features" class="deep-link"><a href="https://www.npmjs.com/package/sequelize#features">Features</a></h2>
+<ul>
+<li>Schema definition</li>
+<li>Schema synchronization/dropping</li>
+<li>1:1, 1:M &amp; N:M Associations</li>
+<li>Through models</li>
+<li>Promises</li>
+<li>Hooks/callbacks/lifecycle events</li>
+<li>Prefetching/association including</li>
+<li>Transactions</li>
+<li>Migrations</li>
+<li>CLI (<a href="https://github.com/sequelize/cli">sequelize-cli</a>)</li>
+</ul>
+<h2 id="user-content-resources" class="deep-link"><a href="https://www.npmjs.com/package/sequelize#resources">Resources</a></h2>
+<ul>
+<li><a href="https://github.com/sequelize/sequelize/blob/master/changelog.md">Changelog</a></li>
+<li><a href="http://docs.sequelizejs.com/en/latest/docs/getting-started/">Getting Started</a></li>
+<li><a href="http://docs.sequelizejs.com/en/latest/">Documentation</a></li>
+<li><a href="http://docs.sequelizejs.com/en/latest/">API Reference</a></li>
+<li><a href="https://github.com/sequelize/sequelize/blob/master/CONTRIBUTING.md">Collaboration and pull requests</a></li>
+<li><a href="https://github.com/sequelize/sequelize/issues/2869">Roadmap</a></li>
+<li><a href="https://twitter.com/SequelizeJS">Twitter</a>: @SequelizeJS</li>
+<li><a href="http://webchat.freenode.net/?channels=sequelizejs">IRC</a>: sequelizejs on Freenode</li>
+<li><a href="https://groups.google.com/forum/#!forum/sequelize">Google Groups</a></li>
+<li><a href="https://github.com/sequelize/sequelize/wiki/Add-ons-&amp;-Plugins">Add-ons &amp; Plugins</a></li>
+</ul>
+
+  </div>
+
+</div>
+
+<div class="sidebar">
+
+    <div class="promotion" data-promotion-id="519" data-promotion-spot="packagePage"><div class="marketing">
+<h3 id="marketing-texthed"><a href="https://www.npmjs.com/npm/on-site?utm_campaign=20160105box" title="npm Enterprise">learn more about npm Enterprise</a></h3>
+
+<p>Private npm registry for enterprise customers. Free 30-day trial.  <a href="https://www.npmjs.com/npm/on-site?utm_campaign=20160105box" title="learn more about npm Enterprise">Learn more…</a></p></div></div>
+
+    <div class="autoselect-wrapper npm-install icon-download">
+      <input type="text" value="npm install sequelize" readonly="">
+      <p><a href="https://www.npmjs.com/package/sequelize/tutorial">how? learn more</a></p>
+    </div>
+
+  <ul class="box">
+
+      <li class="last-publisher">
+          <a href="https://www.npmjs.com/~mickhansen">
+            <img src="./npm-test_files/8232088deccefbd3b48d63b6cec6a09d" alt="mickhansen">
+            <span>mickhansen</span>
+          </a>
+          published
+          <span data-date="2016-05-26T08:41:54.861Z" data-date-format="relative">19 hours ago</span>
+      </li>
+
+    <li>
+      <strong>3.23.3</strong>
+      is the latest
+        of 164 releases
+    </li>
+
+      <li>
+        <a href="https://github.com/sequelize/sequelize">github.com/sequelize/sequelize</a>
+      </li>
+
+
+      <li>
+          <a href="http://spdx.org/licenses/MIT">MIT</a>
+          <img class="osi" alt="Licensed on OSI-approved terms" src="./npm-test_files/osi.svg">®
+      </li>
+
+  </ul>
+
+    <h3 title="collaborators">
+      <a href="https://www.npmjs.com/package/sequelize/access">Collaborators</a>
+    </h3>
+
+    <ul class="humans collaborators">
+        <li>
+            <a href="https://www.npmjs.com/~sdepold" rel="tipsy" original-title="sdepold">
+                <img src="./npm-test_files/f30479a06db175157387334e03766420" alt="sdepold">
+            </a>
+        </li>
+        <li>
+            <a href="https://www.npmjs.com/~durango" rel="tipsy" original-title="durango">
+                <img src="./npm-test_files/edfae171263d23681bfbadaf877b71a1" alt="durango">
+            </a>
+        </li>
+        <li>
+            <a href="https://www.npmjs.com/~mickhansen" rel="tipsy" original-title="mickhansen">
+                <img src="./npm-test_files/8232088deccefbd3b48d63b6cec6a09d" alt="mickhansen">
+            </a>
+        </li>
+        <li>
+            <a href="https://www.npmjs.com/~janaameier" rel="tipsy" original-title="janaameier">
+                <img src="./npm-test_files/db96d6d24b9e032d157d6d3054101aa7" alt="janaameier">
+            </a>
+        </li>
+
+
+    </ul>
+
+    <h3>Stats</h3>
+    <ul class="box">
+
+        <li>
+          <strong class="pretty-number daily-downloads">8,883</strong>
+          downloads in the last day
+        </li>
+        <li>
+          <strong class="pretty-number weekly-downloads">41,159</strong>
+          downloads in the last week
+        </li>
+        <li>
+          <strong class="pretty-number monthly-downloads">185,651</strong>
+          downloads in the last month
+        </li>
+
+        <li id="issues" data-ghapi="https://api.github.com/repos/sequelize/sequelize">
+          <span class="original" style="display: none;">Have an issue? <a href="https://github.com/sequelize/sequelize/issues">666 open issues</a></span>
+            <span class="enhanced" style="">
+              <a href="https://github.com/sequelize/sequelize/issues">666 open issues</a> on GitHub
+            </span>
+        </li>
+
+        <li id="pull_requests" style="">
+          <a href="https://github.com/sequelize/sequelize/pulls">50 open pull requests</a> on GitHub
+        </li>
+
+    </ul>
+
+      <h3>Try it out</h3>
+      <ul class="box">
+        <li class="tonicdev"><a href="https://tonicdev.com/npm/sequelize" target="_blank">Test sequelize in your browser.</a></li>
+      </ul>
+
+  <h3>Keywords</h3>
+  <p class="list-of-links">
+        <a href="https://www.npmjs.com/browse/keyword/object%20relational%20mapper">object relational mapper</a>, 
+        <a href="https://www.npmjs.com/browse/keyword/nodejs">nodejs</a>, 
+        <a href="https://www.npmjs.com/browse/keyword/orm">orm</a>, 
+        <a href="https://www.npmjs.com/browse/keyword/mssql">mssql</a>, 
+        <a href="https://www.npmjs.com/browse/keyword/postgres">postgres</a>, 
+        <a href="https://www.npmjs.com/browse/keyword/postgresql">postgresql</a>, 
+        <a href="https://www.npmjs.com/browse/keyword/sqlite">sqlite</a>, 
+        <a href="https://www.npmjs.com/browse/keyword/mysql">mysql</a>
+  </p>
+
+  <h3>Dependencies (16)</h3>
+  <p class="list-of-links">
+          <a href="https://www.npmjs.com/package/wkx">wkx</a>,
+          <a href="https://www.npmjs.com/package/validator">validator</a>,
+          <a href="https://www.npmjs.com/package/toposort-class">toposort-class</a>,
+          <a href="https://www.npmjs.com/package/terraformer-wkt-parser">terraformer-wkt-parser</a>,
+          <a href="https://www.npmjs.com/package/shimmer">shimmer</a>,
+          <a href="https://www.npmjs.com/package/semver">semver</a>,
+          <a href="https://www.npmjs.com/package/retry-as-promised">retry-as-promised</a>,
+          <a href="https://www.npmjs.com/package/node-uuid">node-uuid</a>,
+          <a href="https://www.npmjs.com/package/moment-timezone">moment-timezone</a>,
+          <a href="https://www.npmjs.com/package/moment">moment</a>,
+          <a href="https://www.npmjs.com/package/lodash">lodash</a>,
+          <a href="https://www.npmjs.com/package/inflection">inflection</a>,
+          <a href="https://www.npmjs.com/package/generic-pool">generic-pool</a>,
+          <a href="https://www.npmjs.com/package/dottie">dottie</a>,
+          <a href="https://www.npmjs.com/package/depd">depd</a>,
+                <a href="https://www.npmjs.com/package/bluebird">bluebird</a>
+  </p>
+
+    <h3><a href="https://www.npmjs.com/browse/depended/sequelize">Dependents</a></h3>
+    <p class="list-of-links dependents">
+
+          <a href="https://www.npmjs.com/package/sequelize-classes">sequelize-classes</a>,
+        
+          <a href="https://www.npmjs.com/package/webcredits">webcredits</a>,
+        
+          <a href="https://www.npmjs.com/package/qpm_testnet">qpm_testnet</a>,
+        
+          <a href="https://www.npmjs.com/package/zbmy-orm">zbmy-orm</a>,
+        
+          <a href="https://www.npmjs.com/package/sequelize-gen">sequelize-gen</a>,
+        
+          <a href="https://www.npmjs.com/package/lape-user">lape-user</a>,
+        
+          <a href="https://www.npmjs.com/package/connect-mysql-session">connect-mysql-session</a>,
+        
+          <a href="https://www.npmjs.com/package/angular-fullstack-deps">angular-fullstack-deps</a>,
+        
+          <a href="https://www.npmjs.com/package/react-webpack-node">react-webpack-node</a>,
+        
+          <a href="https://www.npmjs.com/package/tosano-riordino-pesce-api">tosano-riordino-pesce-api</a>,
+        
+          <a href="https://www.npmjs.com/package/cliche.js">cliche.js</a>,
+        
+          <a href="https://www.npmjs.com/package/open-rest">open-rest</a>,
+        
+          <a href="https://www.npmjs.com/package/pretur.sequelize">pretur.sequelize</a>,
+        
+          <a href="https://www.npmjs.com/package/we-core">we-core</a>,
+        
+          <a href="https://www.npmjs.com/package/clout-sequelize">clout-sequelize</a>,
+        
+          <a href="https://www.npmjs.com/package/ent-hapi-sequelize">ent-hapi-sequelize</a>,
+        
+          <a href="https://www.npmjs.com/package/forest-express-sequelize">forest-express-sequelize</a>,
+        
+          <a href="https://www.npmjs.com/package/taskify_server">taskify_server</a>,
+        
+          <a href="https://www.npmjs.com/package/evaengine">evaengine</a>,
+        
+          <a href="https://www.npmjs.com/package/dvp-dbmodels">dvp-dbmodels</a>,
+        
+          <a href="https://www.npmjs.com/package/db-base">db-base</a>,
+        
+          <a href="https://www.npmjs.com/package/tilt">tilt</a>,
+        
+          <a href="https://www.npmjs.com/package/qpm_basic_income">qpm_basic_income</a>,
+        
+          <a href="https://www.npmjs.com/package/apemandb">apemandb</a>,
+        
+          <a href="https://www.npmjs.com/package/axejs">axejs</a>,
+        
+          <a href="https://www.npmjs.com/package/app.io">app.io</a>,
+        
+          <a href="https://www.npmjs.com/package/402">402</a>,
+        
+          <a href="https://www.npmjs.com/package/gtfs-sequelize">gtfs-sequelize</a>,
+        
+          <a href="https://www.npmjs.com/package/dbmigrations">dbmigrations</a>,
+        
+          <a href="https://www.npmjs.com/package/sequelize-auto">sequelize-auto</a>,
+        
+          <a href="https://www.npmjs.com/package/bentojs-api-mysql">bentojs-api-mysql</a>,
+        
+          <a href="https://www.npmjs.com/package/trailpack-sequelize">trailpack-sequelize</a>,
+        
+          <a href="https://www.npmjs.com/package/sequelize-paper-trail">sequelize-paper-trail</a>,
+        
+          <a href="https://www.npmjs.com/package/teamline">teamline</a>,
+        
+          <a href="https://www.npmjs.com/package/ks-database">ks-database</a>,
+        
+          <a href="https://www.npmjs.com/package/restrap">restrap</a>,
+        
+          <a href="https://www.npmjs.com/package/relay-test">relay-test</a>,
+        
+          <a href="https://www.npmjs.com/package/db-seed-right">db-seed-right</a>,
+        
+          <a href="https://www.npmjs.com/package/sequelize-models">sequelize-models</a>,
+        
+          <a href="https://www.npmjs.com/package/atlassian-connect-express">atlassian-connect-express</a>,
+        
+          <a href="https://www.npmjs.com/package/microkernel-mod-sequelize">microkernel-mod-sequelize</a>,
+        
+          <a href="https://www.npmjs.com/package/jsonapi-store-relationaldb">jsonapi-store-relationaldb</a>,
+        
+          <a href="https://www.npmjs.com/package/sequelize-test-fixtures">sequelize-test-fixtures</a>,
+        
+          <a href="https://www.npmjs.com/package/resourceful-cancan-sequelize">resourceful-cancan-sequelize</a>,
+        
+          <a href="https://www.npmjs.com/package/ks-store">ks-store</a>,
+        
+          <a href="https://www.npmjs.com/package/thorin-store-sql">thorin-store-sql</a>,
+        
+          <a href="https://www.npmjs.com/package/adtecho-common">adtecho-common</a>,
+        
+          <a href="https://www.npmjs.com/package/db_rahulproject">db_rahulproject</a>,
+        
+          <a href="https://www.npmjs.com/package/opensearch-console-server">opensearch-console-server</a>,
+                  <a href="https://www.npmjs.com/package/maniajs">maniajs</a>,
+        <a href="https://www.npmjs.com/browse/depended/sequelize">and more</a>
+    </p>
+
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "sequelize",
+      "description": "Multi dialect ORM for Node.JS/io.js",
+      "url": "https://www.npmjs.com/package/sequelize",
+      "keywords": "object relational mapper,nodejs,orm,mssql,postgres,postgresql,sqlite,mysql",
+      "applicationCategory": "DeveloperApplication",
+      "offers": {
+         "@type": "Offer",
+         "price": "0.00"
+      }
+    }
+  </script>
+
+    <div class="hiring-container" data-template="sidebar"><div class="ad">
+  <p>
+    <a href="http://pebblecode.com/careers/#job-1220" title="pebble {code}">pebble {code}</a> is hiring.
+    <a class="quiet" href="https://www.npmjs.com/whoshiring">View more…</a>
+  </p>
+</div></div>
+
+</div>
+
+
+    </div>
+
+  <footer class="pane bg-npm-navy-1">
+  
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+          <h3 class="h4 type-npm-pastel-3">You Need Help</h3>
+          <hr class="divider-1">
+          <ul class="list-unstyled h6 em-default">
+            <li class="pbl"><a class="type-neutral-11" href="https://docs.npmjs.com/">Documentation</a></li>
+            <li class="pbl"><a class="type-neutral-11" href="https://www.npmjs.com/support">Support / Contact Us</a></li>
+            <li class="pbl"><a class="type-neutral-11" href="http://status.npmjs.org/">Registry Status</a></li>
+            <li class="pbl"><a class="type-neutral-11" href="https://github.com/npm/newww/issues">Website Issues</a></li>
+            <li class="pbl"><a class="type-neutral-11" href="https://github.com/npm/npm/issues">CLI Issues</a></li>
+            <li class="pbl"><a class="type-neutral-11" href="https://www.npmjs.com/policies/security">Security</a></li>
+          </ul>
+        </div>
+  
+        <div class="col-md-6 col-md-offset-1">
+          <h3 class="h4 type-npm-pastel-3">About npm</h3>
+          <hr class="divider-1">
+          <ul class="list-unstyled h6 em-default">
+            <li class="pbl"><a class="type-neutral-11" href="https://www.npmjs.com/about">About npm, Inc</a></li>
+            <li class="pbl"><a class="type-neutral-11" href="https://www.npmjs.com/jobs">Jobs</a></li>
+            <li class="pbl"><a class="type-neutral-11" href="https://www.npmjs.com/npm-weekly">npm Weekly</a></li>
+            <li class="pbl"><a class="type-neutral-11" href="http://blog.npmjs.org/">Blog</a></li>
+            <li class="pbl"><a class="type-neutral-11" href="https://twitter.com/npmjs">Twitter</a></li>
+            <li class="pbl"><a class="type-neutral-11" href="https://github.com/npm">GitHub</a></li>
+          </ul>
+        </div>
+  
+        <div class="col-md-6 col-md-offset-1">
+          <h3 class="h4 type-npm-pastel-3">Legal Stuff</h3>
+          <hr class="divider-1">
+          <ul class="list-unstyled h6 em-default">
+            <li class="pbl"><a class="type-neutral-11" href="https://www.npmjs.com/policies/terms">Terms of Use</a></li>
+            <li class="pbl"><a class="type-neutral-11" href="https://www.npmjs.com/policies/conduct">Code of Conduct</a></li>
+            <li class="pbl"><a class="type-neutral-11" href="https://www.npmjs.com/policies/disputes">Package Name Disputes</a></li>
+            <li class="pbl"><a class="type-neutral-11" href="https://www.npmjs.com/policies/privacy">Privacy Policy</a></li>
+            <li class="pbl"><a class="type-neutral-11" href="https://www.npmjs.com/policies/receiving-reports">Reporting Abuse</a></li>
+            <li class="pbl"><a class="type-neutral-11" href="https://www.npmjs.com/policies/">Other policies</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="txt-c container">
+      <a class="npm-loves-you type-neutral-11" href="https://www.npmjs.com/">
+        npm loves you
+      </a>
+    </div>
+  </footer>
+
+  
+  <script defer="" src="./npm-test_files/vendor.min.5f11e188.js"></script>
+  <script defer="" async="" src="./npm-test_files/3318080746.js"></script>
+  <script defer="" async="" src="./npm-test_files/elqCfg.min.js"></script><!-- Eloqua -->
+
+
+
+<!-- pid&#x3D;455 eec411079b4b1a4ede6eacbf653a912a346f69a5 https://www.npmjs.com www-14-west.internal.npmjs.com  -->
+<div class="drop-down-menu-overlay" data-drop-down-menu="user-info-menu"></div><div class="drop-down-menu-overlay" data-drop-down-menu="product-navigation"></div><div id="window-resizer-tooltip"><a href="https://www.npmjs.com/package/sequelize#" title="Edit settings"></a><span class="tooltipTitle">Window size: </span><span class="tooltipWidth" id="winWidth"></span> x <span class="tooltipHeight" id="winHeight"></span><br><span class="tooltipTitle">Viewport size: </span><span class="tooltipWidth" id="vpWidth"></span> x <span class="tooltipHeight" id="vpHeight"></span></div><div class="autocomplete-container" style="position: absolute; display: none; max-height: 400px; z-index: 9999;"><div class="autocomplete-suggestions" style="position: absolute; display: none; max-height: 400px; z-index: 9999;"></div></div><span id="buffer-extension-hover-button" style="display: none;position: absolute;z-index: 8675309;width: 100px;height: 25px;background-image: url(chrome-extension://noojglkidnpfjbincgijbaiedldjfbhh/data/shared/img/buffer-hover-icon@1x.png);background-size: 100px 25px;opacity: 0.9;cursor: pointer;"></span></body></html>
