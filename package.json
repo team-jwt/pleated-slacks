@@ -1,6 +1,6 @@
 {
   "name": "pleated-slacks",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "An easy way to get started with Docker, for node apps",
   "main": "index.js",
   "dependencies": {
