@@ -53,8 +53,10 @@ describe('npmjs.com fetcher', () => {
     // Hey! This one is synchronous!
     expect(parser.parseDependencies(sampleNPM)).toEqual(targetKeywords);
   });
-  it('should fetch and parse an acutal npmjs.com page', () => {
+  it('should fetch and parse an acutal npmjs.com page', function () {
   // Do we load a page on npm? (#6)
+  // Use the function () format so that we can pass this
+  this.timeout(6000);
   return parser.fetchNPM('https://www.npmjs.com/package/sequelize')
     .then((result) => {
       expect(result).toEqual(targetKeywords);
@@ -67,8 +69,10 @@ describe('docker fetcher', () => {
     // Do we convert the official repos list we get into something useful? (#1)
     expect(parser.parseDockers(sampleDocker)).toEqual(targetDocker);
   });
-  it('should fetch and parse actual JSON from the Docker endpoint', () => {
+  it('should fetch and parse actual JSON from the Docker endpoint', function () {
     // Do we pull in official repos? (#1)
+    // Use the function () format so that we can pass this
+    this.timeout(6000);
     return parser.fetchDockers('https://hub.docker.com/v2/repositories/library/?page_size=3')
       .then((result) => {
         expect(result).toEqual(targetDocker);
@@ -77,7 +81,7 @@ describe('docker fetcher', () => {
 });
 
 describe('npm/docker matcher', () => {
-
+ //TODO - test this
 });
 
 // Check that we grab all of the official repos from Docker (#1)
