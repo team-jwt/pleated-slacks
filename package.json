@@ -9,6 +9,10 @@
     "request": "^2.72.0"
   },
   "devDependencies": {
+    "babel-cli": "^6.9.0",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.8.0",
+    "babel-preset-es2015": "^6.9.0",
+    "babel-register": "^6.9.0",
     "codacy-coverage": "^1.1.3",
     "colortape": "^0.1.1",
     "coveralls": "^2.11.9",
@@ -23,7 +27,8 @@
     "test": "npm run test-parser && npm run test-write",
     "test-parser": "mocha ./test/package-parser.js",
     "test-write": "mocha ./test/docker-writer.js",
-    "test-travis": "node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha -- -R spec ./test/package-parser.js"
+    "test-travis": "node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha -- -R spec ./test/package-parser.js",
+    "build": "babel src -d build"
   },
   "repository": {
     "type": "git",
