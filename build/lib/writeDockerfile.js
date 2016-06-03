@@ -1,19 +1,21 @@
 'use strict';
 
-const fs = require('fs');
-const Promise = require('bluebird');
-const parser = require('./package-parser.js');
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var fs = require('fs');
+var Promise = require('bluebird');
+var parser = require('./package-parser.js');
 
 // For the moment, stub out the package.json
-const PKG_PATH = './test/fixtures/package-test.json';
+var PKG_PATH = './test/fixtures/package-test.json';
 
 // TODO: make this work from node_modules
-const PATH_TO_DOCKER_FILES = 'docker/';
+var PATH_TO_DOCKER_FILES = 'docker/';
 
 // Uncomment this when we're calling writeDockerfile from writeComposefile
-const whatImages = parser.matchDependencies(PKG_PATH);
+var whatImages = parser.matchDependencies(PKG_PATH);
 
-const makeDockerFiles = {};
+var makeDockerFiles = {};
 /**
 * makeDockerFiles is the parent for our internal Dockerfile construction
 * processes. Pretty much everything is private to the function itself.
@@ -29,8 +31,7 @@ makeDockerFiles.formulateDocker = function formulateDocker(dependency) {
   * @returns {Object} What should be created, form of {dependency: the contents for the Dockerfile}
   * @private
   **/
-  return `FROM ${ dependency }: latestt
-  EXPOSE $${ dependency }_PORT`;
+  return 'FROM ' + dependency + ': latestt\n  EXPOSE $' + dependency + '_PORT';
 };
 
 makeDockerFiles.saveDocker = function saveDocker(dependency, formulaObj) {
@@ -42,13 +43,13 @@ makeDockerFiles.saveDocker = function saveDocker(dependency, formulaObj) {
   * @private
   **/
   if (formulaObj) {
-    return new Promise((resolve, reject) => {
+    return new Promise(function (resolve, reject) {
       // Check for a /docker/ dir
-      fs.stat(PATH_TO_DOCKER_FILES, (err, stats) => {
+      fs.stat(PATH_TO_DOCKER_FILES, function (err, stats) {
         if (err) {
           // If not, returns an error value
           // So, make a directory
-          fs.mkdir(PATH_TO_DOCKER_FILES, err => {
+          fs.mkdir(PATH_TO_DOCKER_FILES, function (err) {
             if (err) {
               // Can't make a directory!
               // Might as well just plotz
@@ -57,14 +58,14 @@ makeDockerFiles.saveDocker = function saveDocker(dependency, formulaObj) {
           });
         }
         // Now we know we have a directory. Save the file.
-        fs.writeFile(PATH_TO_DOCKER_FILES + dependency, formulaObj, err => {
+        fs.writeFile(PATH_TO_DOCKER_FILES + dependency, formulaObj, function (err) {
           if (err) {
             // Can't write a file!
             // Always the shlmiel. Might as well make the app my shlimazel.
             reject(err);
           } else {
             // alert! [Below] is ES6 only
-            resolve({ [dependency]: PATH_TO_DOCKER_FILES + dependency });
+            resolve(_defineProperty({}, dependency, PATH_TO_DOCKER_FILES + dependency));
           }
         });
       });
@@ -75,6 +76,8 @@ makeDockerFiles.saveDocker = function saveDocker(dependency, formulaObj) {
 };
 
 makeDockerFiles.makeDockers = function makeDockers(imagesNeeded) {
+  var _this = this;
+
   /**
   * Bring the other methods together, which we have to do because
   * There will be a lot of Promises here.
@@ -83,11 +86,11 @@ makeDockerFiles.makeDockers = function makeDockers(imagesNeeded) {
   * @returns {Function} a Promise of the dockerfiles and their paths. [{ dependency: path }]
   * @private
   **/
-  let obj;
+  var obj = void 0;
 
   // Map the promises of images needed to promises of images created
-  return Promise.map(imagesNeeded, image => {
+  return Promise.map(imagesNeeded, function (image) {
     //  Formulate a Docker, save it, and store the Promise resulting
-    return this.saveDocker(image, this.formulateDocker(image));
+    return _this.saveDocker(image, _this.formulateDocker(image));
   });
 };
