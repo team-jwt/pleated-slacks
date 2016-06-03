@@ -1,6 +1,6 @@
 {
   "name": "pleated-slacks",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "An easy way to get started with Docker, for node apps",
   "main": "index.js",
   "dependencies": {
@@ -32,7 +32,11 @@
     "test-compose": "mocha ./test/writeDCompose.js",
     "test-travis": "npm run build && node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha -- -R spec ./test/*.js",
     "build": "babel src -d build",
-    "watch": "babel-watch src"
+    "watch": "babel-watch src",
+    "prepublish": "npm run build"
+  },
+  "bin": {
+    "slacks": "./build/cli.js"
   },
   "repository": {
     "type": "git",
@@ -42,7 +46,20 @@
     "docker",
     "project-management"
   ],
-  "author": "@iluvpool19, @juniorbird, @tbywong",
+  "contributors": [
+    {
+      "name": "Josh Apstein",
+      "url": "https://github.com/iluvpool19"
+    },
+    {
+      "name": "Wade Armstrong",
+      "url": "https://github.com/juniorbird"
+    },
+    {
+      "name": "Tiffany Wong",
+      "url": "https://github.com/tbywong"
+    }
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/team-jwt/pleated-slacks/issues"
