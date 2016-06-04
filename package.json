@@ -1,6 +1,6 @@
 {
   "name": "pleated-slacks",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "An easy way to get started with Docker, for node apps",
   "main": "index.js",
   "dependencies": {
@@ -32,8 +32,7 @@
     "test-compose": "mocha ./test/writeDCompose.js",
     "test-travis": "npm run build && node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha -- -R spec ./test/*.js",
     "build": "babel src -d build",
-    "watch": "babel-watch src",
-    "prepublish": "npm run build"
+    "watch": "babel-watch src"
   },
   "bin": {
     "slacks": "./build/cli.js"
