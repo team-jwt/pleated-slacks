@@ -1,27 +1,11 @@
 'use strict';
 
 import fs from 'fs';
-import request from 'request';
+import request from 'request-promise';
 import cheerio from 'cheerio';
 import Promise from 'bluebird';
 
-const fetchPromise = (depURL, callback)  => {
-  /**
-  * Given a package url, fetch that url and do the callback to it
-  * This will usually be called using fetchNPM.
-  * @param depurl {string} A fully-qualified URL to the package
-  * @param callback {Function} A callback that takes one parameter.
-  * This callback will only be called if the URL is successfully gotten
-  * @returns {Function} A Promise
-  * @private
-  **/
-  return new Promise((resolve, reject) => {
-    request(depURL, (error, response, content) => {
-      resolve(callback(content));
-      reject(error);
-    });
-  });
-};
+const ERR_NO_PKG = 'Unable find package on NPM';
 
 
 export const packageParser = {};
@@ -54,16 +38,17 @@ packageParser.depURL = pkg => {
   return `https://www.npmjs.com/package/${pkg}`;
 };
 
-packageParser.fetchNPM = depURL => {
+packageParser.fetchNPM = async function(depURL) {
   /**
   * Given a package url, fetch that url and get the dependencies
   * Call this instead of fetchPromise.
   * @param depurl {string} A fully-qualified URL to the package
-  * @returns {Function} A resolved or rejected Promise
+  * @returns {Function} A Promise
   * @private
   **/
-  return fetchPromise(depURL, (p) => packageParser.parseDependencies(p));
-};
+  const npmPage = await request(depURL);
+  return this.parseDependencies(npmPage);
+}
 
 packageParser.parseDependencies = html => {
   /**
@@ -115,18 +100,19 @@ packageParser.parseDockers = dockerJSON => {
   return dockers;
 }
 
-packageParser.fetchDockers = url => {
+packageParser.fetchDockers = async function (url) {
   /**
   * Grabs all Official Docker repositories
   * @param {string} A URL, but usually we won't need this and will use the default
-  * @returns {Function} A resolved or rejected Promise
+  * @returns {Function} A Promise
   * @private
   **/
   const dockerURL = url || 'https://hub.docker.com/v2/repositories/library/?page_size=999';
-  return fetchPromise(dockerURL, (p) => packageParser.parseDockers(p));
-};
+  const dockers = await request(dockerURL);
+  return this.parseDockers(dockers);
+}
 
-packageParser.matchDependencies = path_to_pkg => {
+packageParser.matchDependencies = function(path_to_pkg) {
   /**
   * Given a package, return an object with the docker modules needed to launch
   * that package. This method pulls together all other methods in this object.
@@ -163,12 +149,12 @@ packageParser.matchDependencies = path_to_pkg => {
   return Promise.all(depPromises)
     .then(() => {
       // As each individual npm page fetch completes,
-      Promise.each(depPromises, (promiseList) => {
-        // Get the keywords and add to an array of keywords
-        depKeywords = depKeywords.concat(promiseList);
+      Promise.map(depPromises, (promiseList) => {
+        return promiseList;
       });
-    }).then(() => {
+    }).then((depKeywords) => {
       // When all npm page fetch-and-parses have resolved
+      console.log('dk', depKeywords);
       dockerPromises.then(data => {
         depKeywords.forEach(kw => {
           // For each keyword from an npm page
@@ -182,3 +168,7 @@ packageParser.matchDependencies = path_to_pkg => {
       });
     }).then(() => Object.keys(depList));
 };
+
+// let bar = packageParser.matchDependencies('../../test/fixtures/package-test.json');
+// console.log(bar);
+// bar.then(p => console.log(p));
