@@ -2,10 +2,10 @@
 
 const expect = require('expect');
 const fs = require('fs');
-// const Promise = require('bluebird');
+const Promise = require('bluebird');
 
 // File we're testing
-const parser = require('./../src/lib/parsePackage.js');
+const parser = require('./../build/lib/parsePackage.js').packageParser;
 // let pjKeywords = parser.keywords(targetDeps);
 
 // Load fixtures

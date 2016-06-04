@@ -2,7 +2,7 @@
 
 const expect = require('expect');
 const fs = require('fs');
-const writeDCompose = require('./../src/lib/writeDCompose');
+const writeDCompose = require('./../build/lib/writeDCompose');
 
 const serviceArr = ['mongo', 'redis']
 const links = writeDCompose.formatLinks(serviceArr);
