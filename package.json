@@ -26,11 +26,11 @@
     "mocha": "^2.5.2"
   },
   "scripts": {
-    "test": "npm run test-parser && npm run test-write",
-    "test-parser": "mocha ./test/package-parser.js",
-    "test-write": "mocha ./test/docker-writer.js",
+    "test": "npm run test-parser && npm run test-compose",
+    "test-parser": "mocha ./test/parsePackage.js",
+    "test-write": "mocha ./test/writeDockerfile.js",
     "test-compose": "mocha ./test/writeDCompose.js",
-    "test-travis": "node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha -- -R spec ./test/package-parser.js",
+    "test-travis": "npm run build && node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha -- -R spec ./test/*.js",
     "build": "babel src -d build",
     "watch": "babel-watch src"
   },

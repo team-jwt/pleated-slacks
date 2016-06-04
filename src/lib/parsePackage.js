@@ -1,41 +1,11 @@
 'use strict';
 
-const fs = require('fs');
-const request = require('request');
-const cheerio = require('cheerio');
-const Promise = require('bluebird');
+import fs from 'fs';
+import request from 'request';
+import cheerio from 'cheerio';
+import Promise from 'bluebird';
 
-const packageParser = {};
-/**
-* packageParser is the parent for all of our internal package.json parsing
-* Pretty much everything is private to the function itself
-* To call it, use something like:
-* packageParser.matchDependencies('./test/fixtures/package-test.json').then((p) => console.log(p));
-* @private
-**/
-
-packageParser.dependencies = function dependencies(path_to_pkg) {
-  /**
-  * Load a package.json file
-  * @param path_to_pkg {string} The path, from root of application (_not_ from this module) to the package.json to load
-  * @returns {array} An array of all modules in the dependencies and the devDependencies
-  * @private
-  **/
-  const pj = JSON.parse(fs.readFileSync(path_to_pkg, 'utf8'));
-  return Object.keys(pj.dependencies).concat(Object.keys(pj.devDependencies));
-}
-
-packageParser.depURL = function depURL(pkg) {
-  /**
-  * Given a package name, get the npmjs url to that package
-  * @param pkg {string} The package name, as seen in package.json
-  * @returns {string} A fully-qualified URL to the package
-  * @private
-  **/
-  return `https://www.npmjs.com/package/${pkg}`;
-}
-
-packageParser.fetchPromise = function fetchPromise(depURL, callback) {
+const fetchPromise = (depURL, callback)  => {
   /**
   * Given a package url, fetch that url and do the callback to it
   * This will usually be called using fetchNPM.
@@ -45,15 +15,46 @@ packageParser.fetchPromise = function fetchPromise(depURL, callback) {
   * @returns {Function} A Promise
   * @private
   **/
-  return new Promise( (resolve, reject) => {
+  return new Promise((resolve, reject) => {
     request(depURL, (error, response, content) => {
       resolve(callback(content));
       reject(error);
     });
   });
-}
+};
 
-packageParser.fetchNPM = function fetchNPM(depURL) {
+
+export const packageParser = {};
+/**
+* packageParser is the parent for all of our internal package.json parsing
+* Pretty much everything is private to the function itself
+* To call it, use something like:
+* packageParser.matchDependencies('./test/fixtures/package-test.json').then((p) => console.log(p));
+* @private
+**/
+
+packageParser.dependencies = path_to_pkg => {
+  /**
+  * Load a package.json file
+  * @param path_to_pkg {string} The path, from root of application (_not_ from this module) to the package.json to load
+  * @returns {array} An array of all modules in the dependencies and the devDependencies
+  * @private
+  **/
+  const pj = JSON.parse(fs.readFileSync(path_to_pkg, 'utf8'));
+  return Object.keys(pj.dependencies).concat(Object.keys(pj.devDependencies));
+};
+
+packageParser.depURL = pkg => {
+  /**
+  * Given a package name, get the npmjs url to that package
+  * @param pkg {string} The package name, as seen in package.json
+  * @returns {string} A fully-qualified URL to the package
+  * @private
+  **/
+  return `https://www.npmjs.com/package/${pkg}`;
+};
+
+packageParser.fetchNPM = depURL => {
   /**
   * Given a package url, fetch that url and get the dependencies
   * Call this instead of fetchPromise.
@@ -61,10 +62,10 @@ packageParser.fetchNPM = function fetchNPM(depURL) {
   * @returns {Function} A resolved or rejected Promise
   * @private
   **/
-  return this.fetchPromise(depURL, (p) => this.parseDependencies(p));
-}
+  return fetchPromise(depURL, (p) => packageParser.parseDependencies(p));
+};
 
-packageParser.parseDependencies = function parseDependencies(html) {
+packageParser.parseDependencies = html => {
   /**
   * Takes the html content of an NPM module's page and parses out the keywords
   * Typically this is called when request returns a given NPM page
@@ -77,9 +78,9 @@ packageParser.parseDependencies = function parseDependencies(html) {
   return deps.map((el) => {
     return el.replace(/\s*(\S.*\S)\s*/g, '$1');
   });
-}
+};
 
-packageParser.parseDockers = function parseDockers(dockerJSON) {
+packageParser.parseDockers = dockerJSON => {
   /**
   * Docker makes all the official repos available in a JSON file at one endpoint
   * URL: https://hub.docker.com/v2/repositories/library/
@@ -114,7 +115,7 @@ packageParser.parseDockers = function parseDockers(dockerJSON) {
   return dockers;
 }
 
-packageParser.fetchDockers = function fetchDockers(url) {
+packageParser.fetchDockers = url => {
   /**
   * Grabs all Official Docker repositories
   * @param {string} A URL, but usually we won't need this and will use the default
@@ -122,10 +123,10 @@ packageParser.fetchDockers = function fetchDockers(url) {
   * @private
   **/
   const dockerURL = url || 'https://hub.docker.com/v2/repositories/library/?page_size=999';
-  return this.fetchPromise(dockerURL, (p) => this.parseDockers(p));
-}
+  return fetchPromise(dockerURL, (p) => packageParser.parseDockers(p));
+};
 
-packageParser.matchDependencies = function matchDependencies(path_to_pkg) {
+packageParser.matchDependencies = path_to_pkg => {
   /**
   * Given a package, return an object with the docker modules needed to launch
   * that package. This method pulls together all other methods in this object.
@@ -146,7 +147,7 @@ packageParser.matchDependencies = function matchDependencies(path_to_pkg) {
   let depKeywords = [];
   // Drop our output in an array so that we can later see
   //  if an individual module is in that list
-  let depList = [];
+  let depList = {};
 
   const dockerPromises = this.fetchDockers();
 
@@ -175,11 +176,9 @@ packageParser.matchDependencies = function matchDependencies(path_to_pkg) {
             // If there's not a key in depList with that name
             // And if there's a matching Docker module
             // Add a key
-            depList.push(kw);
+            depList[kw] = true;
           }
         });
       });
-    }).then(() => depList);
-}
-
-module.exports = packageParser;
+    }).then(() => Object.keys(depList));
+};

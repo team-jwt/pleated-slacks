@@ -11,7 +11,7 @@ const PKG_PATH = './test/fixtures/package-test.json';
 const PATH_TO_DOCKER_FILES = 'docker/';
 
 // Uncomment this when we're calling writeDockerfile from writeComposefile
-const whatImages = parser.matchDependencies(PKG_PATH);
+// const whatImages = parser.matchDependencies(PKG_PATH);
 
 const makeDockerFiles = {};
 /**
@@ -31,7 +31,7 @@ makeDockerFiles.formulateDocker = function formulateDocker(dependency) {
   **/
   return `FROM ${dependency}: latestt
   EXPOSE $${dependency}_PORT`;
-}
+};
 
 makeDockerFiles.saveDocker = function saveDocker(dependency, formulaObj) {
   /**
@@ -44,7 +44,7 @@ makeDockerFiles.saveDocker = function saveDocker(dependency, formulaObj) {
   if (formulaObj) {
     return new Promise((resolve, reject) => {
       // Check for a /docker/ dir
-      fs.stat(PATH_TO_DOCKER_FILES, (err, stats) => {
+      fs.stat(PATH_TO_DOCKER_FILES, (err) => {
         if (err) {
           // If not, returns an error value
           // So, make a directory
@@ -72,7 +72,7 @@ makeDockerFiles.saveDocker = function saveDocker(dependency, formulaObj) {
   } else {
     return null;
   }
-}
+};
 
 makeDockerFiles.makeDockers = function makeDockers(imagesNeeded) {
   /**
@@ -83,11 +83,11 @@ makeDockerFiles.makeDockers = function makeDockers(imagesNeeded) {
   * @returns {Function} a Promise of the dockerfiles and their paths. [{ dependency: path }]
   * @private
   **/
-  let obj;
-
   // Map the promises of images needed to promises of images created
   return Promise.map(imagesNeeded, image => {
     //  Formulate a Docker, save it, and store the Promise resulting
     return this.saveDocker(image, this.formulateDocker(image));
   });
-}
+};
+
+module.exports = makeDockerFiles;
