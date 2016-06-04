@@ -30,7 +30,7 @@
     "test-parser": "mocha ./test/parsePackage.js",
     "test-write": "mocha ./test/writeDockerfile.js",
     "test-compose": "mocha ./test/writeDCompose.js",
-    "test-travis": "node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha -- -R spec ./test/package-parser.js",
+    "test-travis": "npm run build && node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha -- -R spec ./test/*.js",
     "build": "babel src -d build",
     "watch": "babel-watch src"
   },
