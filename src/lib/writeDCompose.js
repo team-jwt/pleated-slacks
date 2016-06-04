@@ -7,7 +7,7 @@ const fs = require('fs');
 **/
 
 const formatHelper = (formatted, service) => {
-  return formatted.concat(`- ${service}\n`);
+  return formatted.concat(`    - ${service}\n`);
 }
 
 export const formatLinks = (serviceArr) => {
@@ -16,12 +16,12 @@ export const formatLinks = (serviceArr) => {
    * @param {array} output of writeDockerfile
    * @return {string} formatted service links
    */
-  return serviceArr.reduce(this.formatHelper, '');
+  return serviceArr.reduce(formatHelper, '');
 }
 
 const formatServicesHelper = (formatted, service) => {
-  return formatted.concat(`${service}:
-  image: ${service}\n`);
+  return formatted.concat(`  ${service}:
+    image: ${service}\n\n`);
 }
 
 export const formatServices = (serviceArr) => {
@@ -30,7 +30,7 @@ export const formatServices = (serviceArr) => {
    * @param {array}
    * @return {string}
    */
-   return serviceArr.reduce(this.formatServicesHelper, '');
+   return serviceArr.reduce(formatServicesHelper, '');
 }
 
 export const createCompose = (links, services) => {
@@ -48,12 +48,12 @@ services:
     ports:
     - "${process.env.PORT}:${process.env.PORT}"
     links:
-    ${links}
-  ${services}
+${links}
+${services}
   `;
 }
 
-const writeFile = (compose) => {
+export const writeFile = (compose) => {
   /**
    * creates new file from compose string
    * @param  {string}

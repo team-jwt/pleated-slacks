@@ -2,7 +2,7 @@
 
 const fs = require('fs');
 const Promise = require('bluebird');
-const parser = require('./package-parser.js');
+const parser = require('./parsePackage.js');
 
 // For the moment, stub out the package.json
 const PKG_PATH = './test/fixtures/package-test.json';

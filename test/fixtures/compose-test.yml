@@ -1,0 +1,17 @@
+version: '2'
+services:
+  web:
+    build:
+      context:
+    ports:
+    - "undefined:undefined"
+    links:
+    - mongo
+    - redis
+    - another
+
+  mongo:
+    image: mongo
+
+  redis:
+    image: redis
