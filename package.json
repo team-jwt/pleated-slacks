@@ -35,7 +35,7 @@
     "watch": "babel-watch src"
   },
   "bin": {
-    "slacks": "./build/cli.js"
+    "slacks": "./build/lib/cli.js"
   },
   "repository": {
     "type": "git",
