@@ -4,6 +4,8 @@ const vorpal = require('vorpal');
 const Promise = require('bluebird');
 const fs = require('fs');
 
+console.log('you ran slacks!');
+
 const cli = {};
 /**
 * The CLI is called with $ slacks
