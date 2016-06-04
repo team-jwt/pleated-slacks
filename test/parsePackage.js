@@ -2,10 +2,10 @@
 
 const expect = require('expect');
 const fs = require('fs');
-const promise = require('bluebird');
+// const Promise = require('bluebird');
 
 // File we're testing
-const parser = require('../lib/package-parser.js')
+const parser = require('./../src/lib/parsePackage.js');
 // let pjKeywords = parser.keywords(targetDeps);
 
 // Load fixtures
@@ -20,12 +20,19 @@ const targetDeps = [ 'mongoose',
   'expect',
   'mocha',
   'consul'];
-const targetKeywords = ['object relational mapper', 'nodejs', 'orm', 'mssql', 'postgres', 'postgresql', 'sqlite', 'mysql']
+const targetKeywords = ['object relational mapper',
+  'nodejs',
+  'orm',
+  'mssql',
+  'postgres',
+  'postgresql',
+  'sqlite',
+  'mysql'];
 const targetDocker = {
-  nginx: "Official build of Nginx.",
-  busybox: "Busybox base image.",
-  ubuntu: "Ubuntu is a Debian-based Linux operating system based on free software.",
-}
+  nginx: 'Official build of Nginx.',
+  busybox: 'Busybox base image.',
+  ubuntu: 'Ubuntu is a Debian-based Linux operating system based on free software.',
+};
 
 const sampleNPM = fs.readFileSync('./test/fixtures/npm-test.html', 'utf8');
 const sampleDocker = fs.readFileSync('./test/fixtures/docker-test.json', 'utf8');
@@ -41,7 +48,6 @@ describe('package.json parser', () => {
   });
   it('should generate package URLs', () => {
   // Do we get proper urls? (#5)
-    let npmURL;
     for (let dep of targetDeps) {
       expect(parser.depURL(dep)).toEqual(`https://www.npmjs.com/package/${dep}`);
     }
@@ -83,24 +89,3 @@ describe('docker fetcher', () => {
 describe('npm/docker matcher', () => {
  //TODO - test this
 });
-
-// Check that we grab all of the official repos from Docker (#1)
-/*
-We should match repos for:
-- mongo
-- redis
-- express
-- mySQL
-- postgres
-- ghost
-- solr
-- consul
-- couchDB
-*/
-
-
-// Check that output is a list of all packages with official repos (#4)
-/* Output format example:
-  {  mongo : [mongo, mongoose],
-  redis: [redis], }
-*/

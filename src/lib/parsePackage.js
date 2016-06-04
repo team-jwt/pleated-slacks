@@ -23,7 +23,7 @@ packageParser.dependencies = function dependencies(path_to_pkg) {
   **/
   const pj = JSON.parse(fs.readFileSync(path_to_pkg, 'utf8'));
   return Object.keys(pj.dependencies).concat(Object.keys(pj.devDependencies));
-}
+};
 
 packageParser.depURL = function depURL(pkg) {
   /**
@@ -33,7 +33,7 @@ packageParser.depURL = function depURL(pkg) {
   * @private
   **/
   return `https://www.npmjs.com/package/${pkg}`;
-}
+};
 
 packageParser.fetchPromise = function fetchPromise(depURL, callback) {
   /**
@@ -51,7 +51,7 @@ packageParser.fetchPromise = function fetchPromise(depURL, callback) {
       reject(error);
     });
   });
-}
+};
 
 packageParser.fetchNPM = function fetchNPM(depURL) {
   /**
@@ -62,7 +62,7 @@ packageParser.fetchNPM = function fetchNPM(depURL) {
   * @private
   **/
   return this.fetchPromise(depURL, (p) => this.parseDependencies(p));
-}
+};
 
 packageParser.parseDependencies = function parseDependencies(html) {
   /**
@@ -77,7 +77,7 @@ packageParser.parseDependencies = function parseDependencies(html) {
   return deps.map((el) => {
     return el.replace(/\s*(\S.*\S)\s*/g, '$1');
   });
-}
+};
 
 packageParser.parseDockers = function parseDockers(dockerJSON) {
   /**
@@ -123,7 +123,7 @@ packageParser.fetchDockers = function fetchDockers(url) {
   **/
   const dockerURL = url || 'https://hub.docker.com/v2/repositories/library/?page_size=999';
   return this.fetchPromise(dockerURL, (p) => this.parseDockers(p));
-}
+};
 
 packageParser.matchDependencies = function matchDependencies(path_to_pkg) {
   /**
@@ -180,6 +180,6 @@ packageParser.matchDependencies = function matchDependencies(path_to_pkg) {
         });
       });
     }).then(() => Object.keys(depList));
-}
+};
 
 module.exports = packageParser;
