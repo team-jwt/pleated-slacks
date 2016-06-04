@@ -146,7 +146,7 @@ packageParser.matchDependencies = function matchDependencies(path_to_pkg) {
   let depKeywords = [];
   // Drop our output in an array so that we can later see
   //  if an individual module is in that list
-  let depList = [];
+  let depList = {};
 
   const dockerPromises = this.fetchDockers();
 
@@ -175,11 +175,11 @@ packageParser.matchDependencies = function matchDependencies(path_to_pkg) {
             // If there's not a key in depList with that name
             // And if there's a matching Docker module
             // Add a key
-            depList.push(kw);
+            depList[kw] = true;
           }
         });
       });
-    }).then(() => depList);
+    }).then(() => Object.keys(depList));
 }
 
 module.exports = packageParser;
