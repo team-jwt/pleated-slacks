@@ -112,7 +112,9 @@ packageParser.fetchDockers = async function (url) {
   return this.parseDockers(dockers);
 }
 
-packageParser.matchDependencies = function(path_to_pkg) {
+packageParser.matchDependencies = async function(path_to_pkg) {
+  console.log('in parser');
+  console.log(path_to_pkg);
   /**
   * Given a package, return an object with the docker modules needed to launch
   * that package. This method pulls together all other methods in this object.
@@ -121,54 +123,53 @@ packageParser.matchDependencies = function(path_to_pkg) {
   *   {  mongo : true,
   *   redis: true, }
   * @param {string} The path, from root of application (_not_ from this module) to the package.json to load
-  * @returns {Object} An object describing all of the needed docker modules
+  * @returns {Function} A Promise containt an object describing all of the needed docker modules
   **/
   const packageJSON = this.dependencies(path_to_pkg);
 
+  console.log('package', packageJSON);
+
+  // From our dependencies, get a list of NPM URLs
   let packageURLs = packageJSON.map((pkg) => {
     return this.depURL(pkg);
   });
 
-  let depPromises = [];
-  let depKeywords = [];
-  // Drop our output in an array so that we can later see
-  //  if an individual module is in that list
-  let depList = {};
+  console.log('packageURLs', packageURLs);
 
-  const dockerPromises = this.fetchDockers();
+  // Create an array holding all our Promises, so that we can Promise.all them later
+  let fetchedPromises = [this.fetchDockers()];
 
   // We now have an array of NPM URLs
   // We need to iterate over the array
   packageURLs.forEach(url => {
     // And for each URL, grab a Promise of the fetch & parse
-    // Drop that in an array
-    depPromises.push(this.fetchNPM(url));
+    // Drop that in our array
+    fetchedPromises.push(this.fetchNPM(url));
   });
 
-  // Get a returnable Promise
-  return Promise.all(depPromises)
-    .then(() => {
-      // As each individual npm page fetch completes,
-      Promise.map(depPromises, (promiseList) => {
-        return promiseList;
-      });
-    }).then((depKeywords) => {
-      // When all npm page fetch-and-parses have resolved
-      console.log('dk', depKeywords);
-      dockerPromises.then(data => {
-        depKeywords.forEach(kw => {
-          // For each keyword from an npm page
-          if (!depList.hasOwnProperty(kw) && data.hasOwnProperty(kw)) {
-            // If there's not a key in depList with that name
-            // And if there's a matching Docker module
-            // Add a key
-            depList[kw] = true;
-          }
-        });
-      });
-    }).then(() => Object.keys(depList));
-};
+  // If we separately awaited the dependencies and Docker promises
+  // We'd do things serially. Instead, use destructuring and the spread
+  // operator to await them in paralell
+  const [...fetchedData] = await Promise.all(fetchedPromises);
 
-// let bar = packageParser.matchDependencies('../../test/fixtures/package-test.json');
-// console.log(bar);
-// bar.then(p => console.log(p));
+  // The first item in fetchedData is our Docker module names
+  // All remaining items are the dependencies... in multiple nested arrays
+  const dockerKeywords = fetchedData.shift();
+  const depKeywords = fetchedData.reduce((accum, el) => accum.concat(el), []);
+
+  console.log('docks', dockerKeywords);
+  console.log('deps', depKeywords);
+  let depList = {};
+
+  depKeywords.forEach(kw => {
+    // For each keyword from an npm page
+    if (!depList.hasOwnProperty(kw) && dockerKeywords.hasOwnProperty(kw)) {
+      // If there's not already a key in depList with that name
+      //  And if there's a matching Docker module
+      //  Add a key
+      depList[kw] = true;
+    }
+  });
+
+  return Object.keys(depList);
+};

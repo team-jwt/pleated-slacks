@@ -33,6 +33,14 @@ const targetDocker = {
   busybox: 'Busybox base image.',
   ubuntu: 'Ubuntu is a Debian-based Linux operating system based on free software.',
 };
+const targetFinal = [ 'redis',
+  'node',
+  'postgres',
+  'mysql',
+  'ghost',
+  'couchdb',
+  'solr',
+  'consul' ];
 
 const sampleNPM = fs.readFileSync('./test/fixtures/npm-test.html', 'utf8');
 const sampleDocker = fs.readFileSync('./test/fixtures/docker-test.json', 'utf8');
@@ -86,6 +94,13 @@ describe('docker fetcher', () => {
   });
 });
 
-describe('npm/docker matcher', () => {
- //TODO - test this
+describe('npm/docker matcher', function () {
+  it('should match package items to Docker modules -- final integration test', function () {
+    // currently, this is slower than ideal
+    this.timeout(12000);
+    return parser.matchDependencies('./test/fixtures/package-test.json')
+      .then((result) => {
+        expect(result).toEqual(targetFinal);
+      });
+  });
 });
