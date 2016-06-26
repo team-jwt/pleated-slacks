@@ -5,3 +5,4 @@ workflow.*
 docker/
 build
 .DS_Store
+*- logo.*
