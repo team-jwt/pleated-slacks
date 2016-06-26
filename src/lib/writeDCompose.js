@@ -1,19 +1,13 @@
 const fs = require('fs');
 
-/**
-* writeDCompose is the parent for our internal docker-compose construction
-* processes.
-* @private
-**/
-
 const formatHelper = (formatted, service) => {
   return formatted.concat(`    - ${service}\n`);
-}
+};
 
 export const formatLinks = (serviceArr) => {
   /**
    * formats the services array into string to be used under links config in compose file
-   * @param {array} output of writeDockerfile
+   * @param {array} output of parsePackage
    * @return {string} formatted service links
    */
   return serviceArr.reduce(formatHelper, '');
@@ -22,22 +16,22 @@ export const formatLinks = (serviceArr) => {
 const formatServicesHelper = (formatted, service) => {
   return formatted.concat(`  ${service}:
     image: ${service}\n\n`);
-}
+};
 
 export const formatServices = (serviceArr) => {
   /**
    * formats the services array into string to be used to add services in compose file
-   * @param {array}
-   * @return {string}
+   * @param {array} output of parsePackage
+   * @return {string} needed services
    */
    return serviceArr.reduce(formatServicesHelper, '');
-}
+};
 
 export const createCompose = (links, services) => {
   /**
    * writes new docker-compose.yml file to be used on command line
    * note: using docker-compose version 2 file format
-   * @param {object} output of writeDockerfile
+   * @param {object} output of parsePackage
    * @return {string} a string containing the contents of the Compose file
    */
   return `version: '2'
@@ -51,7 +45,7 @@ services:
 ${links}
 ${services}
   `;
-}
+};
 
 export const writeFile = (compose) => {
   /**
@@ -67,4 +61,4 @@ export const writeFile = (compose) => {
       return true;
     }
   });
-}
+};
