@@ -38,7 +38,7 @@ export const createCompose = (links, services) => {
    * writes new docker-compose.yml file to be used on command line
    * note: using docker-compose version 2 file format
    * @param {object} output of writeDockerfile
-   * @return
+   * @return {string} a string containing the contents of the Compose file
    */
   return `version: '2'
 services:
@@ -55,10 +55,16 @@ ${services}
 
 export const writeFile = (compose) => {
   /**
-   * creates new file from compose string
+   * saves new file from compose string built in createCompose
    * @param  {string}
+   * @return {Boolean} true if successful; false if fails
    */
   fs.writeFileSync('docker-compose.yml', compose, 'utf8', (err) => {
-    if (err) return console.error(err);
-  })
+    if (err) {
+      console.error(err);
+      return false;
+    } else {
+      return true;
+    }
+  });
 }
