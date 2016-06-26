@@ -6,6 +6,8 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/2b851c39f8d549ccbeb51eb44bd94918)](https://www.codacy.com/app/wade_2/pleated-slacks?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=team-jwt/pleated-slacks&amp;utm_campaign=Badge_Grade)
 [![David-DM Dependencies](https://david-dm.org/team-jwt/pleated-slacks.svg)](https://david-dm.org/team-jwt/pleated-slacks)
 
+<center><img src="pleated-slacks.png" width="300" /></center>
+
 ## Helping Node devs get started with Docker since about now
 
 Pleated Slacks is the comfortable way to get started with Docker,
