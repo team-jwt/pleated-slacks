@@ -1,81 +1,130 @@
+#!/usr/bin/env node
+
 'use strict';
 
-const vorpal = require('vorpal');
-const Promise = require('bluebird');
-const fs = require('fs');
-
-console.log('you ran slacks!');
-
-const cli = {};
 /**
 * The CLI is called with $ slacks
-* There are 3 options
-* -c --create -p --pleat (default) Creates a new Docker setup
-* -f --force --press Overwrites an existing Docker setup in the format Pleated Slacks uses
-* -u --up -w --wear Launches the Docker setup using the script we created
-* -d --down -l --launder Turns off the Docker setup using the script we created
-* -h --help Provides info on what the command does
+* It:
+*   1. Runs parsePackage
+*   2. Confirms what techs you use
+*   3. Saves the Docker Compose file
+*   4. Offers you the opportunity to run the shell file to start it all
 **/
 
-const helpText = `-c --create -p --pleat (default) Creates a new Docker setup
--f --force --press Overwrites an existing Docker setup in the format Pleated Slacks uses
--u --up -w --wear Launches the Docker setup using the script we created
--d --down -l --launder Turns off the Docker setup using the script we created
--h --help Provides info on what the command does`
+import inquirer from 'inquirer';
+import { matchDependencies } from './parsePackage.js';
+import { formatLinks, formatServices, createCompose, writeFile } from './writeDCompose.js';
 
-cli.registerCommands = function registerCommands() {
+// Error messages here
+const ERR_NO_CWD = 'Unable to find the root directory of your Node app. Exiting.';
+const ERR_NO_PKG = 'Unable to find your Node app\'s package.json. Exiting.';
+const ERR_DIDNT_WRITE = 'Couldn\'t write docker-compose.yml. Exiting.';
+
+
+async function getServers(pkg_path) {
   /**
-  * Registers all of the Vorpal command structures for the script
-  * Call this method first.
-  * @param {none}
-  * @returns {boolean} true/exit with error if fails
+  * Given a path to the package, get the docker modules we may
+  * want to include in the Docker Compose file.
+  * @param pkg_path {string} The relative path to the package file
+  * @returns {Array} An array containing the names of the Docker modules to use
   * @private
   **/
-  vorpal.command('slacks')
-    .option('-c, --create', 'Create your Docker setup')
-    .option('-p, --pleat', 'Create your Docker setup')
-    .option('-f, --force', 'Overwrite existing Docker setup')
-    .option('-u, --up', 'Launch your Docker setup')
-    .option('-w, --wear', 'Launch your Docker setup')
-    .option('-d, --down', 'Turn off your Docker setup')
-    .option('-l, --launder', 'Turn off your Docker setup')
-    .help(function() {
-      this.log(helpText);
-    })
-    .action(function(args, cb){
-      this.log(args);
+  let dependencies;
+  try {
+    dependencies = await matchDependencies(pkg_path);
+  } catch (err) {
+    console.error('error', err);
+    throw new Error(`${ERR_NO_PKG} - ${err}`);
+  };
+  return dependencies;
+}
+
+function makeChoices(dockerModules) {
+  /**
+  * Create an array of objects, as is needed to populate the checkboxes
+  * where the user confirms which modules to put in the Docker Compose file
+  * Output example:
+  * [
+  *   {name: redis, checked: true},
+  *   {name: mongo, checked: true},
+  * ]
+  * @param dockerModules {Array} The modules we think the user wants
+  * @returns {Array} An array of objects to pass to Inquirer's checkboxes method
+  * @private
+  **/
+  return dockerModules.map(module => {
+    return ({
+      name: module,
+      checked: true,
     });
+  });
 }
 
-
-cli.createDocker = function createDocker() {
+function writeDockerCompose(choices) {
   /**
-  * Kicks off the build of a new Docker setup
-  * Checks if we've already made one and refuses to create another
-  * Unless you -f force it.
-  * @param {none}
-  * @return {array} the result of packageParser.matchDependences
-  * an Array of required Docker modules, e.g. [node, mongo, redis]
+  * Given a set of modules we want, write the needed Docker Compose file
+  * @param choices {Array} The modules the user wants to use
+  * @returns {boolean} True, if successful; false, otherwise.
+  * @private
   **/
-  console.log('createDocker');
+  try {
+    writeFile(createCompose(formatLinks(choices), formatServices(choices)));
+  } catch (err) {
+    console.error(ERR_DIDNT_WRITE, err);
+    return false
+  }
+
+  return true;
 }
 
-cli.upDocker = function upDocker() {
+// Questions for Inquirer
+let q_start = {
+  type: 'input',
+  name: 'pkgPath',
+  message: 'What is the relative path to the package.json for this app?',
+  default: './package.json',
+};
+let q_confirm = {
+  type: 'checkbox',
+  name: 'confirmDockers',
+  message: 'We\'ve detected you may need these services. Please select the ones you want:',
+};
+
+(async function userQuery() {
   /**
-  * Launches our Docker setup.
-  * @param {none}
-  * @return {none}, but the script should write something to the console.
+  * Presents the user with a series of questions, and writes a Docker Compose
+  * file based off of their input.
+  * @param none
+  * @returns {boolean} True if successful; false, otherwise
+  * @private
   **/
-  console.log('upDocker');
-}
 
-cli.downDocker = function downDocker() {
-  /**
-  * Turns off our Docker setup.
-  * @param {none}
-  * @return {none}, but the script should write something to the console.
-  **/
-  console.log('downDocker');
-}
+  // Get the package.json path
+  const answers = await inquirer.prompt(q_start);
 
-cli.registerCommands();
+  let deps;
+
+  // Get the servers from the package.json
+  try {
+    deps = await getServers(answers.pkgPath);
+  } catch (err) {
+    console.error(err);
+    return false;
+  }
+
+  // Confirm the servers the user wants
+  q_confirm.choices = makeChoices(deps);
+  const confirmations = await inquirer.prompt(q_confirm);
+
+  // Write out the Docker Compose file
+  try {
+    writeDockerCompose(confirmations.confirmDockers);
+  } catch (err) {
+    console.error(err);
+    return false;
+  }
+
+  // Success! Provide feedback.
+  console.log('Your Docker Compose File has been written.');
+  return true;
+})();

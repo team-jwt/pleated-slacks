@@ -1,19 +1,20 @@
 {
-    "extends": "airbnb",
-    "valid-jsdoc": ["error", {
-      "preferType": {
-        "String": "string",
-        "object": "Object"
-        }
-      }],
-    "require-jsdoc": ["error", {
-        "require": {
-            "FunctionDeclaration": true,
-            "MethodDefinition": true,
-            "ClassDeclaration": true
-        }
+  "parser": "babel-eslint",
+  "extends": "airbnb",
+  "valid-jsdoc": ["error", {
+    "preferType": {
+      "String": "string",
+      "object": "Object"
+      }
     }],
-    "plugins": [
-        "react"
-    ]
+  "require-jsdoc": ["error", {
+      "require": {
+          "FunctionDeclaration": true,
+          "MethodDefinition": true,
+          "ClassDeclaration": true
+      }
+  }],
+  "plugins": [
+      "react"
+  ]
 }
