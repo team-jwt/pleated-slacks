@@ -5,6 +5,7 @@ import request from 'request-promise';
 import cheerio from 'cheerio';
 import Promise from 'bluebird';
 
+const ERR_NO_PJ = 'Can\'t find a package.json at that location'
 const ERR_NO_PKG = 'Unable find package on NPM';
 
 
@@ -24,8 +25,25 @@ packageParser.dependencies = path_to_pkg => {
   * @returns {array} An array of all modules in the dependencies and the devDependencies
   * @private
   **/
-  const pj = JSON.parse(fs.readFileSync(path_to_pkg, 'utf8'));
-  return Object.keys(pj.dependencies).concat(Object.keys(pj.devDependencies));
+
+  let thePkg;
+  let theJSON;
+
+  try {
+    thePkg = fs.readFileSync(path_to_pkg, 'utf8')
+  } catch (err) {
+    console.error('error:', err);
+    throw new Error(ERR_NO_PKG);
+  }
+
+  try {
+    theJSON = JSON.parse(thePkg);
+  } catch (err) {
+    console.error('error:', err);
+    throw new Error(ERR_NO_PJ);
+  }
+
+  return Object.keys(theJSON.dependencies).concat(Object.keys(theJSON.devDependencies));
 };
 
 packageParser.depURL = pkg => {
@@ -112,9 +130,7 @@ packageParser.fetchDockers = async function (url) {
   return this.parseDockers(dockers);
 }
 
-packageParser.matchDependencies = async function(path_to_pkg) {
-  console.log('in parser');
-  console.log(path_to_pkg);
+packageParser.matchDependencies = async function (path_to_pkg) {
   /**
   * Given a package, return an object with the docker modules needed to launch
   * that package. This method pulls together all other methods in this object.
@@ -125,16 +141,18 @@ packageParser.matchDependencies = async function(path_to_pkg) {
   * @param {string} The path, from root of application (_not_ from this module) to the package.json to load
   * @returns {Function} A Promise containt an object describing all of the needed docker modules
   **/
-  const packageJSON = this.dependencies(path_to_pkg);
+  let packageJSON;
 
-  console.log('package', packageJSON);
+  try {
+    packageJSON = this.dependencies(path_to_pkg);
+  } catch (err) {
+    console.error(err);
+  }
 
   // From our dependencies, get a list of NPM URLs
   let packageURLs = packageJSON.map((pkg) => {
     return this.depURL(pkg);
   });
-
-  console.log('packageURLs', packageURLs);
 
   // Create an array holding all our Promises, so that we can Promise.all them later
   let fetchedPromises = [this.fetchDockers()];
@@ -157,8 +175,6 @@ packageParser.matchDependencies = async function(path_to_pkg) {
   const dockerKeywords = fetchedData.shift();
   const depKeywords = fetchedData.reduce((accum, el) => accum.concat(el), []);
 
-  console.log('docks', dockerKeywords);
-  console.log('deps', depKeywords);
   let depList = {};
 
   depKeywords.forEach(kw => {

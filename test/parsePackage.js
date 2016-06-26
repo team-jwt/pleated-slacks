@@ -72,7 +72,7 @@ describe('npmjs.com fetcher', () => {
   // Use the function () format so that we can pass this
   this.timeout(6000);
   return parser.fetchNPM('https://www.npmjs.com/package/sequelize')
-    .then((result) => {
+    .then(result => {
       expect(result).toEqual(targetKeywords);
     });
   });
@@ -88,7 +88,7 @@ describe('docker fetcher', () => {
     // Use the function () format so that we can pass this
     this.timeout(6000);
     return parser.fetchDockers('https://hub.docker.com/v2/repositories/library/?page_size=3')
-      .then((result) => {
+      .then(result => {
         expect(result).toEqual(targetDocker);
       });
   });
@@ -99,7 +99,7 @@ describe('npm/docker matcher', function () {
     // currently, this is slower than ideal
     this.timeout(12000);
     return parser.matchDependencies('./test/fixtures/package-test.json')
-      .then((result) => {
+      .then(result => {
         expect(result).toEqual(targetFinal);
       });
   });
