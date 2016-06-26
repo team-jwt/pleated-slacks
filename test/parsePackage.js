@@ -5,8 +5,7 @@ const fs = require('fs');
 const Promise = require('bluebird');
 
 // File we're testing
-const parser = require('./../build/lib/parsePackage.js').packageParser;
-// let pjKeywords = parser.keywords(targetDeps);
+const parser = require('./../build/lib/parsePackage.js');
 
 // Load fixtures
 const targetDeps = [ 'mongoose',
@@ -33,6 +32,14 @@ const targetDocker = {
   busybox: 'Busybox base image.',
   ubuntu: 'Ubuntu is a Debian-based Linux operating system based on free software.',
 };
+const targetFinal = [ 'redis',
+  'node',
+  'postgres',
+  'mysql',
+  'ghost',
+  'couchdb',
+  'solr',
+  'consul' ];
 
 const sampleNPM = fs.readFileSync('./test/fixtures/npm-test.html', 'utf8');
 const sampleDocker = fs.readFileSync('./test/fixtures/docker-test.json', 'utf8');
@@ -64,7 +71,7 @@ describe('npmjs.com fetcher', () => {
   // Use the function () format so that we can pass this
   this.timeout(6000);
   return parser.fetchNPM('https://www.npmjs.com/package/sequelize')
-    .then((result) => {
+    .then(result => {
       expect(result).toEqual(targetKeywords);
     });
   });
@@ -80,12 +87,19 @@ describe('docker fetcher', () => {
     // Use the function () format so that we can pass this
     this.timeout(6000);
     return parser.fetchDockers('https://hub.docker.com/v2/repositories/library/?page_size=3')
-      .then((result) => {
+      .then(result => {
         expect(result).toEqual(targetDocker);
       });
   });
 });
 
-describe('npm/docker matcher', () => {
- //TODO - test this
+describe('npm/docker matcher', function () {
+  it('should match package items to Docker modules -- final integration test', function () {
+    // currently, this is slower than ideal
+    this.timeout(12000);
+    return parser.matchDependencies('./test/fixtures/package-test.json')
+      .then(result => {
+        expect(result).toEqual(targetFinal);
+      });
+  });
 });
