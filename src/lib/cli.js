@@ -16,7 +16,6 @@ import { matchDependencies } from './parsePackage.js';
 import { formatLinks, formatServices, createCompose, writeFile } from './writeDCompose.js';
 
 // Error messages here
-const ERR_NO_CWD = 'Unable to find the root directory of your Node app. Exiting.';
 const ERR_NO_PKG = 'Unable to find your Node app\'s package.json. Exiting.';
 const ERR_DIDNT_WRITE = 'Couldn\'t write docker-compose.yml. Exiting.';
 
@@ -71,7 +70,7 @@ function writeDockerCompose(choices) {
     writeFile(createCompose(formatLinks(choices), formatServices(choices)));
   } catch (err) {
     console.error(ERR_DIDNT_WRITE, err);
-    return false
+    return false;
   }
 
   return true;

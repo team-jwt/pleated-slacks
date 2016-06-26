@@ -2,10 +2,6 @@
 
 const fs = require('fs');
 const Promise = require('bluebird');
-const parser = require('./parsePackage.js');
-
-// For the moment, stub out the package.json
-const PKG_PATH = './test/fixtures/package-test.json';
 
 // TODO: make this work from node_modules
 const PATH_TO_DOCKER_FILES = 'docker/';

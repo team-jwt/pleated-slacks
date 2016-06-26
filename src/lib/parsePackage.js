@@ -3,9 +3,8 @@
 import fs from 'fs';
 import request from 'request-promise';
 import cheerio from 'cheerio';
-import Promise from 'bluebird';
 
-const ERR_NO_PJ = 'Can\'t find a package.json at that location'
+const ERR_NO_PJ = 'Can\'t find a package.json at that location';
 const ERR_NO_PKG = 'Unable find package on NPM';
 
 export const dependencies = path_to_pkg => {
@@ -20,7 +19,7 @@ export const dependencies = path_to_pkg => {
   let theJSON;
 
   try {
-    thePkg = fs.readFileSync(path_to_pkg, 'utf8')
+    thePkg = fs.readFileSync(path_to_pkg, 'utf8');
   } catch (err) {
     console.error('error:', err);
     throw new Error(ERR_NO_PKG);
@@ -56,7 +55,7 @@ export const fetchNPM = async function(depURL) {
   **/
   const npmPage = await request(depURL);
   return parseDependencies(npmPage);
-}
+};
 
 export const parseDependencies = html => {
   /**
@@ -106,7 +105,7 @@ export const parseDockers = dockerJSON => {
     dockers[el.name] = el.description;
   });
   return dockers;
-}
+};
 
 export const fetchDockers = async function (url) {
   /**
@@ -118,7 +117,7 @@ export const fetchDockers = async function (url) {
   const dockerURL = url || 'https://hub.docker.com/v2/repositories/library/?page_size=999';
   const dockers = await request(dockerURL);
   return parseDockers(dockers);
-}
+};
 
 export const matchDependencies = async function (path_to_pkg) {
   /**

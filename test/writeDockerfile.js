@@ -9,6 +9,6 @@ describe('write a dockerfile', () => {
   it('should write Dockerfile', () => {
     writer.makeNodeServer();
     expect(fs.existsSync('Dockerfile')).toExist;
-    expect(fs.readFileSync('Dockerfile').toString()).toEqual(`FROM node:latest \nEXPOSE ${process.env.PORT || 3000}`)
+    expect(fs.readFileSync('Dockerfile').toString()).toEqual(`FROM node:latest \nEXPOSE ${process.env.PORT || 3000}`);
   });
 });
