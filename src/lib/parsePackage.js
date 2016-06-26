@@ -8,17 +8,7 @@ import Promise from 'bluebird';
 const ERR_NO_PJ = 'Can\'t find a package.json at that location'
 const ERR_NO_PKG = 'Unable find package on NPM';
 
-
-export const packageParser = {};
-/**
-* packageParser is the parent for all of our internal package.json parsing
-* Pretty much everything is private to the function itself
-* To call it, use something like:
-* packageParser.matchDependencies('./test/fixtures/package-test.json').then((p) => console.log(p));
-* @private
-**/
-
-packageParser.dependencies = path_to_pkg => {
+export const dependencies = path_to_pkg => {
   /**
   * Load a package.json file
   * @param path_to_pkg {string} The path, from root of application (_not_ from this module) to the package.json to load
@@ -46,7 +36,7 @@ packageParser.dependencies = path_to_pkg => {
   return Object.keys(theJSON.dependencies).concat(Object.keys(theJSON.devDependencies));
 };
 
-packageParser.depURL = pkg => {
+export const depURL = pkg => {
   /**
   * Given a package name, get the npmjs url to that package
   * @param pkg {string} The package name, as seen in package.json
@@ -56,7 +46,7 @@ packageParser.depURL = pkg => {
   return `https://www.npmjs.com/package/${pkg}`;
 };
 
-packageParser.fetchNPM = async function(depURL) {
+export const fetchNPM = async function(depURL) {
   /**
   * Given a package url, fetch that url and get the dependencies
   * Call this instead of fetchPromise.
@@ -65,10 +55,10 @@ packageParser.fetchNPM = async function(depURL) {
   * @private
   **/
   const npmPage = await request(depURL);
-  return this.parseDependencies(npmPage);
+  return parseDependencies(npmPage);
 }
 
-packageParser.parseDependencies = html => {
+export const parseDependencies = html => {
   /**
   * Takes the html content of an NPM module's page and parses out the keywords
   * Typically this is called when request returns a given NPM page
@@ -83,7 +73,7 @@ packageParser.parseDependencies = html => {
   });
 };
 
-packageParser.parseDockers = dockerJSON => {
+export const parseDockers = dockerJSON => {
   /**
   * Docker makes all the official repos available in a JSON file at one endpoint
   * URL: https://hub.docker.com/v2/repositories/library/
@@ -118,7 +108,7 @@ packageParser.parseDockers = dockerJSON => {
   return dockers;
 }
 
-packageParser.fetchDockers = async function (url) {
+export const fetchDockers = async function (url) {
   /**
   * Grabs all Official Docker repositories
   * @param {string} A URL, but usually we won't need this and will use the default
@@ -127,42 +117,42 @@ packageParser.fetchDockers = async function (url) {
   **/
   const dockerURL = url || 'https://hub.docker.com/v2/repositories/library/?page_size=999';
   const dockers = await request(dockerURL);
-  return this.parseDockers(dockers);
+  return parseDockers(dockers);
 }
 
-packageParser.matchDependencies = async function (path_to_pkg) {
+export const matchDependencies = async function (path_to_pkg) {
   /**
   * Given a package, return an object with the docker modules needed to launch
   * that package. This method pulls together all other methods in this object.
   * Response is an object that shows the docker module.
   * Example response:
-  *   {  mongo : true,
-  *   redis: true, }
+  *   [mongo,
+  *   redis,]
   * @param {string} The path, from root of application (_not_ from this module) to the package.json to load
-  * @returns {Function} A Promise containt an object describing all of the needed docker modules
+  * @returns {Function} A Promise containt an array listing all of the needed docker modules
   **/
   let packageJSON;
 
   try {
-    packageJSON = this.dependencies(path_to_pkg);
+    packageJSON = dependencies(path_to_pkg);
   } catch (err) {
     console.error(err);
   }
 
   // From our dependencies, get a list of NPM URLs
   let packageURLs = packageJSON.map((pkg) => {
-    return this.depURL(pkg);
+    return depURL(pkg);
   });
 
   // Create an array holding all our Promises, so that we can Promise.all them later
-  let fetchedPromises = [this.fetchDockers()];
+  let fetchedPromises = [fetchDockers()];
 
   // We now have an array of NPM URLs
   // We need to iterate over the array
   packageURLs.forEach(url => {
     // And for each URL, grab a Promise of the fetch & parse
     // Drop that in our array
-    fetchedPromises.push(this.fetchNPM(url));
+    fetchedPromises.push(fetchNPM(url));
   });
 
   // If we separately awaited the dependencies and Docker promises

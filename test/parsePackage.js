@@ -5,8 +5,7 @@ const fs = require('fs');
 const Promise = require('bluebird');
 
 // File we're testing
-const parser = require('./../build/lib/parsePackage.js').packageParser;
-// let pjKeywords = parser.keywords(targetDeps);
+const parser = require('./../build/lib/parsePackage.js');
 
 // Load fixtures
 const targetDeps = [ 'mongoose',

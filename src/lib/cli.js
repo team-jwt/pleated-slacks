@@ -12,7 +12,7 @@
 **/
 
 import inquirer from 'inquirer';
-import { packageParser } from './parsePackage.js';
+import { matchDependencies } from './parsePackage.js';
 import { formatLinks, formatServices, createCompose, writeFile } from './writeDCompose.js';
 
 // Error messages here
@@ -31,7 +31,7 @@ async function getServers(pkg_path) {
   **/
   let dependencies;
   try {
-    dependencies = await packageParser.matchDependencies(pkg_path);
+    dependencies = await matchDependencies(pkg_path);
   } catch (err) {
     console.error('error', err);
     throw new Error(`${ERR_NO_PKG} - ${err}`);
