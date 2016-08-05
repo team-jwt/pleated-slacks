@@ -4,7 +4,7 @@ const expect = require('expect');
 const fs = require('fs');
 const writeDCompose = require('./../build/lib/writeDCompose');
 
-const serviceArr = ['mongo', 'redis'];
+const serviceArr = ['mongo', 'redis','mySQL'];
 const links = writeDCompose.formatLinks(serviceArr);
 const services = writeDCompose.formatServices(serviceArr);
 const composeStr = writeDCompose.createCompose(links, services);
@@ -13,6 +13,7 @@ describe('write docker-compose.yml file', () => {
   it('expect function to format links', () => {
     const formattedLinks = `    - mongo
     - redis
+    - mySQL
 `;
     expect(links).toEqual(formattedLinks);
   });
@@ -22,6 +23,9 @@ describe('write docker-compose.yml file', () => {
 
   redis:
     image: redis
+
+  mySQL:
+    image: mySQL  
 
 `;
     expect(services).toEqual(formattedServices);
