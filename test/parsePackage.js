@@ -4,7 +4,7 @@ const expect = require('expect');
 const fs = require('fs');
 
 // File we're testing
-const parser = require('./../build/lib/parsePackage.js');
+const parser = require('./../src/lib/parsePackage.js');
 
 // Load fixtures
 const targetDeps = [ 'mongoose',
@@ -95,7 +95,7 @@ describe('docker fetcher', () => {
 describe('npm/docker matcher', function () {
   it('should match package items to Docker modules -- final integration test', function () {
     // currently, this is slower than ideal
-    this.timeout(12000);
+    this.timeout(40000);
     return parser.matchDependencies('./test/fixtures/package-test.json')
       .then(result => {
         expect(result).toEqual(targetFinal);
