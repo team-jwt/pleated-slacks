@@ -165,7 +165,6 @@ export const matchDependencies = async function (path_to_pkg) {
   const depKeywords = fetchedData.reduce((accum, el) => accum.concat(el), []);
 
   let depList = {};
-
   depKeywords.forEach(kw => {
     // For each keyword from an npm page
     if (!depList.hasOwnProperty(kw) && dockerKeywords.hasOwnProperty(kw)) {
